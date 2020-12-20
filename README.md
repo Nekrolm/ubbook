@@ -36,6 +36,8 @@
    1. [Переполнение знаковых целых чисел](numeric/overflow.md)
    2. [Числа с плавающей точкой](numeric/floats.md)
 3. Нарушения lifetime объектов
+   1. [Висячие ссылки -- общие случаи](lifetime/use_after_free_in_general.md)
+   2. [Автовывод типов и висячие ссылки](lifetime/decltype_auto_and_explicit_types.md)
 
 ---
 ## И еще кое-что
