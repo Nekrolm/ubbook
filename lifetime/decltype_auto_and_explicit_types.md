@@ -10,7 +10,7 @@
 template <class T>
 auto find(const std::vector<T>& v, const T& x) {
     ...
-    // очень длинное тело со множетсвом return 
+    // очень длинное тело со множеством return 
     ...
 }
 ```
@@ -27,7 +27,7 @@ auto find(const std::vector<T>& v, const T& x) {
 
 ```C++
 std::map<std::string, int> counters = { {"hello", 5}, {"world", 5} };
-std::vector<std::string_view> keys; // получаем список ключей, используем string_view, чтобы не делать лишних компий
+std::vector<std::string_view> keys; // получаем список ключей, используем string_view, чтобы не делать лишних копий
 keys.reserve(counters.size());
 std::transform(std::begin(counters), 
                std::end(counters),
@@ -35,15 +35,15 @@ std::transform(std::begin(counters),
                [](const std::pair<std::string, int>& item) -> std::string_view {
                    return item.first;
                });
-// как-то обрабытываем список ключей:
+// как-то обрабатываем список ключей:
 for (std::string_view k : keys) {
     std::cout << k << "\n"; // UB! dangling reference!
 }
 ```
 
-Мы немного ошиблись в аргументе лямбда-функции и получили ссылку на временный объект, а в месте с ней -- [неопределенное поведение]((https://godbolt.org/z/EKcob3))
+Мы немного ошиблись в аргументе лямбда-функции и получили ссылку на временный объект, а вместе с ней -- [неопределенное поведение](https://godbolt.org/z/EKcob3).
 
-[Исправляем](https://godbolt.org/z/E6evof) ошибку, добавляя `const` перед `string`
+[Исправляем](https://godbolt.org/z/E6evof) ошибку, добавляя `const` перед `string`:
 ```C++
 [](const std::pair<const std::string, int>& item) -> std::string_view 
 ```
@@ -78,9 +78,9 @@ public:
 
 Мы можем использовать автовывод как минимум в 4 различных формах
 
-1. Голый `auto`. Минимум проблем. В результате всегда получается тип без ссылок.
+1. Голый `auto`. Минимум проблем. В результате всегда получается тип без ссылок:
 ```C++
-auto x = f(...); //но может быть не то, чего вы хотите: копия вместо ссылки
+auto x = f(...); // но может быть не то, чего вы хотите: копия вместо ссылки
 
 class C {
 public:
@@ -89,14 +89,14 @@ private:
    T name;
 };
 ```
-2. `const auto&` -- может забиндиться к висячей ссылке
+2. `const auto&` -- может забиндиться к висячей ссылке:
 ```C++
    const auto& x = std::min(1, 2);
    // x -- dangling reference
 ```
-В качестве возвращаемого значения функции, `const auto&` использовать в 90% случаев [не выйдет](https://godbolt.org/z/hqf3nK) при правильно настроенных предупреждениях компилятора.
+В качестве возвращаемого значения функции `const auto&` использовать в 90% случаев [не выйдет](https://godbolt.org/z/hqf3nK) при правильно настроенных предупреждениях компилятора.
 
-3. `auto&&` -- universal/forwarding reference. Точно также может забиндиться к висячей ссылке
+3. `auto&&` -- universal/forwarding reference. Точно также может забиндиться к висячей ссылке:
 ```C++
    auto&& x = std::min(1, 2);
    // x -- dangling reference
@@ -112,7 +112,7 @@ private:
 ```
 Разница в том, что `auto&&` -- всегда ссылка, а `decltype(auto)` -- "как объявлено в возвращаемом значении". Что может быть важно при дальнейших вычислениях над типами.
 
-`decltype(auto)` начинает стрелять при использовании его в качество возвращаемого значения, требуя дополнительной внимательности при написании [кода](https://godbolt.org/z/PPcPYK):
+`decltype(auto)` начинает стрелять при использовании его в качестве возвращаемого значения, требуя дополнительной внимательности при написании [кода](https://godbolt.org/z/PPcPYK):
 ```C++
 class C {
 public:
