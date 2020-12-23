@@ -39,6 +39,7 @@
    1. [Висячие ссылки -- общие случаи](lifetime/use_after_free_in_general.md)
    2. [Автовывод типов и висячие ссылки](lifetime/decltype_auto_and_explicit_types.md)
    3. [string_view](lifetime/string_view.md)
+   4. [range-based for](lifetime/for_loop.md)
 
 ---
 ## И еще кое-что
