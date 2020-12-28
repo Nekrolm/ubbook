@@ -41,6 +41,8 @@
    3. [std::string_view](lifetime/string_view.md)
    4. [Range-based for](lifetime/for_loop.md)
    5. [Cамоинициализация](lifetime/self_init.md)
+4. Неработающий синтаксис и стандартная библиотека
+   1. [Most Vexing Parse](syntax/most_vexing_parse.md)
 
 ---
 ## И еще кое-что
