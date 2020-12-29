@@ -43,6 +43,7 @@
    5. [Cамоинициализация](lifetime/self_init.md)
 4. Неработающий синтаксис и стандартная библиотека
    1. [Most Vexing Parse](syntax/most_vexing_parse.md)
+   2. [Const](syntax/const_launder.md)
 
 ---
 ## И еще кое-что
