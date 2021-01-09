@@ -47,6 +47,7 @@
    2. [Const](syntax/const_launder.md)
    3. [Конструкторы контейнеров](syntax/stl_constructors.md)
    4. [noexcept](syntax/noexcept.md)
+   5. [std::move](syntax/move.md)
 5. Исполнение программы
    1. [Бесконечные циклы](runtime/endless_loop.md)
    2. [Рекурсия](runtime/recursion.md)
