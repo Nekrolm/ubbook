@@ -141,7 +141,7 @@ for (const auto& p : persons){
 Отследить использование после перемещения способны некоторые статические анализаторы.
 Для clang-tidy тоже [есть проверки](https://clang.llvm.org/extra/clang-tidy/checks/bugprone-use-after-move.html).
 
-Если вы реализуете перемещаемые классы и хотите учесть возможность самоприсваивания/самоперемещения, либо используйте идиому copy/move-and-swap, либо не забывайте проверить совпадение адресов текущего и перемещаемого объектов:
+Если вы реализуете перемещаемые классы и хотите учесть возможность самоприсваивания/самоперемещения, либо используйте [идиому copy/move-and-swap](https://mropert.github.io/2019/01/07/copy_swap_20_years/), либо не забывайте проверить совпадение адресов текущего и перемещаемого объектов:
 
 ```C++
 MyType& operator=(MyType&& other) noexcept {
@@ -159,3 +159,4 @@ MyType& operator=(MyType&& other) noexcept {
 2. https://youtu.be/rHIkrotSwcc?t=1065
 3. https://stackoverflow.com/questions/7027523/what-can-i-do-with-a-moved-from-object
 4. https://herbsutter.com/2020/02/17/move-simply/
+5. https://mropert.github.io/2019/01/07/copy_swap_20_years/
