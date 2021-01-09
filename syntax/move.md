@@ -141,6 +141,19 @@ for (const auto& p : persons){
 Отследить использование после перемещения способны некоторые статические анализаторы.
 Для clang-tidy тоже [есть проверки](https://clang.llvm.org/extra/clang-tidy/checks/bugprone-use-after-move.html).
 
+Если вы реализуете перемещаемые классы и хотите учесть возможность самоприсваивания/самоперемещения, либо используйте идиому copy/move-and-swap, либо не забывайте проверить совпадение адресов текущего и перемещаемого объектов:
+
+```C++
+MyType& operator=(MyType&& other) noexcept {
+    if (this == std::addressof(other)) { // addressof сработает, 
+                                         // если у вас перегружен &
+        return *this; 
+    }
+    ...
+}
+```
+
+
 ## Полезные ссылки
 1. https://clang.llvm.org/extra/clang-tidy/checks/bugprone-use-after-move.html
 2. https://youtu.be/rHIkrotSwcc?t=1065
