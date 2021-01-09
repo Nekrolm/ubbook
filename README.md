@@ -50,7 +50,7 @@
 5. Исполнение программы
    1. [Бесконечные циклы](runtime/endless_loop.md)
    2. [Рекурсия](runtime/recursion.md)
-   3. [noexcept](runtime/noexcept.md)
+   3. [Ложный noexcept](runtime/noexcept.md)
 
 ---
 ## И еще кое-что
