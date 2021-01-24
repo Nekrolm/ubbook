@@ -174,8 +174,28 @@ ErrorOrInteger<I> mod(I a, std::type_identity_t<I> b) {
     constexpr uint8_t first_byte = x; // Implicit cast. Warning
 ```
 
+Очень неприятным является переполнение целых, возникающее из-за правил `integer promotion`:
+
+```C++
+constexpr std::uint16_t IntegerPromotionUB(std::uint16_t x) {
+    x *= x;
+    return x;
+}
+
+// 65535 * 65535 mod 1<<16 = 1
+
+static_assert(IntegerPromotionUB(65535) == 1); // won't compile
+```
+
+Несмотря на то что для беззнаковых переполнение определено как взятие остатка по модулю `2^n` и мы используем только беззнаковую переменную,
+из-за `integer promotion` в этом [примере](https://godbolt.org/z/GWsaGo) возникает переполнение знакового! числа и вытекающее из этого UB на платформах, где размер `int` больше `uint16_t` (то есть почти везде сегодня).
+
+```C++
+x *= x; // переписывается как x = x * x;
+// тип uint16 меньше чем тип int -- для * выполняется неявное приведение к int.
+```
 
 
 ### Полезные ссылки
 1. https://wiki.sei.cmu.edu/confluence/display/c/INT32-C.+Ensure+that+operations+on+signed+integers+do+not+result+in+overflow
-2. 
+2. https://stackoverflow.com/a/46073296
