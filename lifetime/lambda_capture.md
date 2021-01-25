@@ -7,7 +7,7 @@ C++11 подарил нам лямбда-функции и, вместе с ни
 ```C++
 auto make_add_n(int n) {
     return [&](int x) {
-        return x + n; // n -- станет висячей ссылкой!
+        return x + n; // n — станет висячей ссылкой!
     };
 }
 
@@ -16,10 +16,10 @@ auto add5 = make_add_n(5);
 std::cout << add5(5); // UB!
 ```
 
-Ничего принципиально новго -- тут все те же проблемы, что и с возвратом ссылки из функции.
+Ничего принципиально новго — тут все те же проблемы, что и с возвратом ссылки из функции.
 clang иногда [способен выдать предупреждение](https://godbolt.org/z/rsq8hM).
 
-Но стоит нам принять аргумент `make_add_n` по ссылке -- и [никаких предупреждений не будет](https://godbolt.org/z/1K89z9).
+Но стоит нам принять аргумент `make_add_n` по ссылке — и [никаких предупреждений не будет](https://godbolt.org/z/1K89z9).
 
 Аналогично проблему [можно наиграть](https://godbolt.org/z/31KdTj) и для методов объектов:
 ```C++
@@ -28,8 +28,8 @@ struct Task {
 
     std::function<void()> GetNotifier() {
         return [this]{
-            // this -- может стать висячей ссылкой!
-            std::cout << "notify " << id << "\n"; 
+            // this — может стать висячей ссылкой!
+            std::cout << "notify " << id << "\n";
         };
     }
 };
@@ -47,8 +47,8 @@ struct Task {
 
     std::function<void()> GetNotifier() {
         return [=]{
-            // this -- может стать висячей ссылкой!
-            std::cout << "notify " << id << "\n"; 
+            // this — может стать висячей ссылкой!
+            std::cout << "notify " << id << "\n";
         };
     }
 };
@@ -68,7 +68,7 @@ struct Task {
     std::function<void()> GetNotifier() & {
         return [this]{
             // для this теперь намного сложнее стать висячей ссылкой
-            std::cout << "notify " << id << "\n"; 
+            std::cout << "notify " << id << "\n";
         };
     }
 };
