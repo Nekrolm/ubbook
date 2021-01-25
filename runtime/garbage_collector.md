@@ -105,9 +105,15 @@ private:
 
 Если не верите, можете про них забыть. Пожалуй, это единстенное UB, которое нигде и никак не проявляется. И не проявится. Скорее всего не проявится. Даже есть предложения [удалить](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/p2186r0.html) эту совершенно дурную для C++ «фичу».
 
+--------
+
+Надо понимать, что сам по себе сборщик мусора для C++ не является чем-то сверхъестественным. На C/C++ написаны сборщики мусора для JVM. Никто не мещает использовать их в C++-программах: просто используем альтернативные функции для выделения памяти. С их помощью даже можно переопределить поведение операторов `new` и `delete`. Но очень мало какой код на C++ пишется в предположении, что под этими операторами работает сборщик мусора.
+
+
 ## Полезные ссылки
 1. https://en.cppreference.com/w/cpp/memory/gc/undeclare_reachable
 2. https://en.cppreference.com/w/cpp/memory/gc/declare_reachable
 3. https://eel.is/c++draft/util.dynamic.safety
 4. http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/p2186r0.html
 5. http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2670.htm
+6. https://en.wikipedia.org/wiki/Boehm_garbage_collector
