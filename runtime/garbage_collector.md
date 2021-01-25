@@ -32,7 +32,7 @@ struct MayBeUninitialized {
                                     operator new (sizeof(T), 
                                                   std::align_val_t(alignof(T))));
         // единственный указатель только был создан и сразу же уничтожился
-        ptr_repr_ &= 1; // set unitialized flag
+        ptr_repr_ |= 1; // set unitialized flag
     }
 
     ~MayBeUninitialized() {
@@ -86,8 +86,9 @@ private:
         void* ptr = operator new (sizeof(T), std::align_val_t(alignof(T)));
         std::declare_reachable(ptr);
         ptr_repr_ = reinterpret_cast<uintptr_t>(ptr);
-        // единственный указатель только был создан и сразу же уничтожился
-        ptr_repr_ &= 1; // set unitialized flag
+        // единственный указатель только был создан и сразу же уничтожился, но
+        // мы пометили память под ним достижимой, чтобы отвадить мифический сборщик мусора
+        ptr_repr_ |= 1; // set unitialized flag
     }
     
     ~MayBeUninitialized() {
