@@ -52,6 +52,7 @@
    1. [Бесконечные циклы](runtime/endless_loop.md)
    2. [Рекурсия](runtime/recursion.md)
    3. [Ложный noexcept](runtime/noexcept.md)
+   4. [Сборщик мусора](runtime/garbage_collector.md)
 6. Происхождение указателей
    1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
 
