@@ -29,7 +29,7 @@ struct Task {
     std::function<void()> GetNotifier() {
         return [this]{
             // this — может стать висячей ссылкой!
-            std::cout << "notify " << id << "\n"; 
+            std::cout << "notify " << id << "\n";
         };
     }
 };
@@ -48,7 +48,7 @@ struct Task {
     std::function<void()> GetNotifier() {
         return [=]{
             // this — может стать висячей ссылкой!
-            std::cout << "notify " << id << "\n"; 
+            std::cout << "notify " << id << "\n";
         };
     }
 };
@@ -68,7 +68,7 @@ struct Task {
     std::function<void()> GetNotifier() & {
         return [this]{
             // для this теперь намного сложнее стать висячей ссылкой
-            std::cout << "notify " << id << "\n"; 
+            std::cout << "notify " << id << "\n";
         };
     }
 };

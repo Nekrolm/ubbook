@@ -39,7 +39,7 @@ int main() {
 
 Проблема в том, что `std::min` объявлен как
 ```C++
-template<class T> const T& min(const T& a, const T& b); 
+template<class T> const T& min(const T& a, const T& b);
 ```
 
 Число `10` является временным объектом (_prvalue_), который умирает сразу же по выходе из функции `std::min`.
@@ -47,7 +47,7 @@ template<class T> const T& min(const T& a, const T& b);
 В C++ разрешено присваивать временные объекты константным ссылкам. В таком случае константная ссылка продлевает временному объекту жизнь (объект "материализуется") и живет до выхода ссылки из области видимости. Дальнейшие присваивания константным ссылкам эффекта продлевания времени жизни не имеют.
 
 Любой код, возвращающий из функции или метода ссылку или сырой указатель, является потенциальным источником проблем где угодно.
-Код, который только принимает аргументы по ссылке и никуда эти ссылки не сохраняет, также может быть источником проблем, но в куда более неочевидных ситуациях. 
+Код, который только принимает аргументы по ссылке и никуда эти ссылки не сохраняет, также может быть источником проблем, но в куда более неочевидных ситуациях.
 
 ```C++
 template <class T>
@@ -79,8 +79,8 @@ std::vector<T> append_n_copies(std::vector<T> elements, T x, int N) {
 void foo() {
     std::vector<int> v; v.push_back(10);
     ...
-    // v = append_n_copies(std::move(v), v.front(), 5); 
-    // UB, use-after-move, порядок вычисления аргументов неопределен: 
+    // v = append_n_copies(std::move(v), v.front(), 5);
+    // UB, use-after-move, порядок вычисления аргументов неопределен:
     // v.front() может быть вызван на пустом векторе
 
     auto el = v.front();
@@ -98,7 +98,7 @@ void foo() {
 #include <utility>
 
 template <class T>
-std::reference_wrapper<const T> safe_min(std::reference_wrapper<const T> a, 
+std::reference_wrapper<const T> safe_min(std::reference_wrapper<const T> a,
                                          std::reference_wrapper<const T> b){
     return std::min(a, b);
 }
@@ -121,10 +121,10 @@ decltype(auto) // выводим тип без отбрасывания ссыл
 safe_min(T1&& a, T2&& b) { // forwarding reference на каждый аргумент.
     if constexpr (std::is_lvalue_reference_v<decltype(a)> &&
                   std::is_lvalue_reference_v<decltype(b)>) {
-        // оба аргумента были lvalue — можно безопасно вернуть ссылку              
-        return std::min(a, b);              
+        // оба аргумента были lvalue — можно безопасно вернуть ссылку
+        return std::min(a, b);
     } else {
-        // один из аргументов — временный объект. 
+        // один из аргументов — временный объект.
         // возвращаем по значению.
         // для этого делаем копию
         auto temp = std::min(a,b); // auto&& нельзя!
@@ -183,12 +183,12 @@ int main() {
 ```C++
 class VectorBuilder {
     ...
-    const std::vector<int>& GetVector() & { 
+    const std::vector<int>& GetVector() & {
         std::cout << "As Lvalue\n";
-        return v; 
+        return v;
     }
 
-     std::vector<int> GetVector() && { 
+     std::vector<int> GetVector() && {
         std::cout << "As Rvalue\n";
         return std::move(v);
     }
@@ -226,7 +226,7 @@ auto&& builder = VectorBuilder{}.Append(1).Append(2).Append(3);
 
 Чтобы этого избежать, нам нужно:
 
-Либо настраивать линтер, запрещающий использовать `auto&&` и `const auto&` c этим классом в правой части. 
+Либо настраивать линтер, запрещающий использовать `auto&&` и `const auto&` c этим классом в правой части.
 
 Либо жертвовать производительностью, и в rvalue версии `Append` возвращать по значению (+ move) — при большом количестве примитивных, всегда копируемых, объектов внутри, просадка будет заметной.
 

@@ -11,7 +11,7 @@ int count_char(const std::string& s, char c) {
     ....
 }
 
-count_char("hello world", 'l'); // создастся временный объект std::string, 
+count_char("hello world", 'l'); // создастся временный объект std::string,
 // выделится память, скопируется строка, а потом строка умрет и память
 // деаллоцируется — плохо, много лишних операций
 ```
@@ -21,7 +21,7 @@ count_char("hello world", 'l'); // создастся временный объ�
 int count_char(const char* s, char c) {
     // мы тут не знаем ничего про длину строки
     // она вообще null-териминированная?
-    
+
     // Можем только написать код, наивно рассчитывающий, что его
     // будут вызывать правильно.
     ...
@@ -32,7 +32,7 @@ int count_char(const char* s, char c) {
 
 ```C++
 int count_char_impl(const char* s, size_t len, char c) {
-   ... 
+   ...
 }
 ```
 
@@ -85,12 +85,12 @@ std::string_view common_prefix(std::string_view a, std::string_view b) {
 int main() {
     using namespace std::string_literals;
     {
-       auto common = common_prefix("helloW", 
+       auto common = common_prefix("helloW",
                                    "hello"s + "World111111111111111111111");
        std::cout << common << "\n"; // ok
     }
     {
-       auto common = common_prefix("hello"s + "World111111111111111111111111", 
+       auto common = common_prefix("hello"s + "World111111111111111111111111",
                                    "helloW");
        std::cout << common << "\n"; // dangling ref
     }

@@ -10,7 +10,7 @@
 template <class T>
 auto find(const std::vector<T>& v, const T& x) {
     ...
-    // очень длинное тело со множеством return 
+    // очень длинное тело со множеством return
     ...
 }
 ```
@@ -21,7 +21,7 @@ auto find(const std::vector<T>& v, const T& x) {
 ---
 ## Проблема явного указания типа
 
-Длинно и много писать — решается с помощью `using`-псевдонимов. Так что это не проблема. Другое дело, что изменение типа в одном месте потребует синхронизированных изменений в других местах. 
+Длинно и много писать — решается с помощью `using`-псевдонимов. Так что это не проблема. Другое дело, что изменение типа в одном месте потребует синхронизированных изменений в других местах.
 
 И все могло быть хорошо: поменяли где-то в объявлении, получили ошибки компиляции — исправили во всех местах, на которые указали ошибки. Но в C++ есть неявное приведение типов, которое особенно жестоко наказывает при использовании ссылок.
 
@@ -29,7 +29,7 @@ auto find(const std::vector<T>& v, const T& x) {
 std::map<std::string, int> counters = { {"hello", 5}, {"world", 5} };
 std::vector<std::string_view> keys; // получаем список ключей, используем string_view, чтобы не делать лишних копий
 keys.reserve(counters.size());
-std::transform(std::begin(counters), 
+std::transform(std::begin(counters),
                std::end(counters),
                std::back_inserter(keys),
                [](const std::pair<std::string, int>& item) -> std::string_view {
@@ -45,7 +45,7 @@ for (std::string_view k : keys) {
 
 [Исправляем](https://godbolt.org/z/E6evof) ошибку, добавляя `const` перед `string`:
 ```C++
-[](const std::pair<const std::string, int>& item) -> std::string_view 
+[](const std::pair<const std::string, int>& item) -> std::string_view
 ```
 
 Проходят недели, код рефакторится. `counters` отъезжают в поле какого-нибудь класса. Получение и обработка ключей — в его второстепенный метод. А потом внезапно выясняется, что тип значений в ассоциативном массиве надо бы поменять на меньший — пусть `short`.
@@ -70,7 +70,7 @@ public:
     }
 }
 ```
-Опять ошиблись. Опять надо исправлять. 
+Опять ошиблись. Опять надо исправлять.
 `std::map` может в будущем поменяться на что-то другое, у чего итератор возвращает уже не настоящий `pair`, а прокси-объект. Универсальным решением будет в этом случае — `decltype(auto)` в качестве возвращаемого значения.
 
 
@@ -121,10 +121,10 @@ public:
     }
 
     decltype(auto) Name2() const {
-        return (name); // ссылка. Выражение (name) имеет тип const T&: 
+        return (name); // ссылка. Выражение (name) имеет тип const T&:
                        // само по себе (name) — T&, но this помечен const, поэтому
                        // получается const T&
-    } 
+    }
 
     decltype(auto) ConstName() const {
         return const_name; // const копия. const_name объявлен как const T

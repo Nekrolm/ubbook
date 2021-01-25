@@ -1,6 +1,6 @@
 # Еще не мертв, но еще и не жив. Self-reference
 
-Область видимости объекта начинается сразу же после его объявления. В той же строчке. Поэтому 
+Область видимости объекта начинается сразу же после его объявления. В той же строчке. Поэтому
 в С++ очень легко сконструировать синтаксически корректное выражение, использующее еще не сконструированный объект.
 
 ```C++
@@ -11,10 +11,10 @@ int x = x + 5; // UB
 // менее явно
 const int max_v = 10;
 
-void fun(int y) { 
+void fun(int y) {
    const int max_v = [&]{
        // локальный max_v перекрывает глобальный max_v
-       return std::min(max_v, y); 
+       return std::min(max_v, y);
    }();
    ...
 }
@@ -29,10 +29,10 @@ void fun(int y) {
 ```C++
 const int max_v = 10;
 
-void fun(int y) { 
+void fun(int y) {
    const int max_v = []{
        // тут виден только глобальный max_v
-       return std::min(max_v, y); 
+       return std::min(max_v, y);
    }();
    ...
 }
@@ -46,7 +46,7 @@ void fun(int y) {
 
 ```C++
 struct ExtremelyLongClassName {
-   
+
     using UnspeekableInternalType = size_t;
 
     UnspeekableInternalType val;
@@ -57,19 +57,19 @@ struct ExtremelyLongClassName {
 ExtremelyLongClassName x { x.Default() + 5 }; // Ok, well-defined
 
 
-ExtremelyLongClassName y { 
-    [] ()-> ExtremelyLongClassName::UnspeekableInternalType { 
+ExtremelyLongClassName y {
+    [] ()-> ExtremelyLongClassName::UnspeekableInternalType {
         // сложные вычисления
         return 1;
     }()
 };
 
-ExtremelyLongСlassName z { 
+ExtremelyLongСlassName z {
     [] ()-> decltype(z.Default()) { // Ok, well-defined
         // сложные вычисления
         return 1;
     }()
- }; 
+ };
 ```
 
 Также эта фича может быть полезна в каких-то [специфических](https://godbolt.org/z/qY18c8) случаях, в которых вам зачем-то нужен объект, ссылающийся сам на себя
@@ -83,7 +83,7 @@ struct Iface {
 
 struct Impl : Iface {
     explicit Impl(const Iface* other_ = nullptr) : other(other_) {
-        
+
     };
 
     int method(int x) const override {

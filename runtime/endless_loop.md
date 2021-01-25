@@ -9,7 +9,7 @@
 Занятный пример — таким образом можно ["опровергнуть" великую теорему Ферма](https://godbolt.org/z/nE7oWf)
 ```C++
 #include <iostream>
-     
+
 int fermat () {
     const int MAX = 1000;
     int a=1,b=1,c=1;
@@ -26,7 +26,7 @@ int fermat () {
         }
         if (c>MAX) {
             c=1;
-        } 
+        }
     }
     return 0;
 }
@@ -64,13 +64,13 @@ int fermat() {
         }
         if (c>MAX) {
             c=1;
-        } 
+        }
     }
     return 1;
 }
 ```
 
-Даже если в цикле будут операции I/O, он все равно [может исчезнуть](https://godbolt.org/z/P8YxeT), 
+Даже если в цикле будут операции I/O, он все равно [может исчезнуть](https://godbolt.org/z/P8YxeT),
 если компилятор увидит, что эти операции от цикла не зависят
 ```C++
 int fermat () {
@@ -92,7 +92,7 @@ int fermat () {
         }
         if (c>MAX) {
             c=1;
-        } 
+        }
     }
     return 0;
 }
