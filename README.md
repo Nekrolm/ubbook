@@ -30,12 +30,13 @@
 
 
 # Содержание
-0. [Как искать UB?](how_to_find_ub.md)
-1. [Сужающие преобразования](numeric/narrowing.md)
-2. Целые и вещественные числа
+0. [Что такое UB и как оно проявляется](what_is_ub.md)
+1. [Как искать UB?](how_to_find_ub.md)
+2. [Сужающие преобразования](numeric/narrowing.md)
+3. Целые и вещественные числа
    1. [Переполнение знаковых целых чисел](numeric/overflow.md)
    2. [Числа с плавающей точкой](numeric/floats.md)
-3. Нарушения lifetime объектов
+4. Нарушения lifetime объектов
    1. [Висячие ссылки — общие случаи](lifetime/use_after_free_in_general.md)
    2. [Автовывод типов и висячие ссылки](lifetime/decltype_auto_and_explicit_types.md)
    3. [std::string_view](lifetime/string_view.md)
@@ -43,17 +44,17 @@
    5. [Cамоинициализация](lifetime/self_init.md)
    6. [std::vector и инвалидация ссылок](lifetime/vector_invalidation.md)
    7. [Висячие ссылки в лямбдах](lifetime/lambda_capture.md)
-4. Неработающий синтаксис и стандартная библиотека
+5. Неработающий синтаксис и стандартная библиотека
    1. [Most Vexing Parse](syntax/most_vexing_parse.md)
    2. [Const](syntax/const_launder.md)
    3. [Конструкторы контейнеров](syntax/stl_constructors.md)
    4. [std::move](syntax/move.md)
-5. Исполнение программы
+6. Исполнение программы
    1. [Бесконечные циклы](runtime/endless_loop.md)
    2. [Рекурсия](runtime/recursion.md)
    3. [Ложный noexcept](runtime/noexcept.md)
    4. [Сборщик мусора](runtime/garbage_collector.md)
-6. Происхождение указателей
+7. Происхождение указателей
    1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
 
 ---
