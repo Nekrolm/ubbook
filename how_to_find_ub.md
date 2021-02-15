@@ -17,7 +17,7 @@
 
 ----
 
-Компиляторы `Clang` и `GCC` с влюченными флагами `-Wall -Wpedantic` [способны](https://godbolt.org/z/zM4r1s) находят некоторые ошибки.
+Компиляторы `Clang` и `GCC` с влюченными флагами `-Wall -Wpedantic` [способны](https://godbolt.org/z/zM4r1s) находить некоторые ошибки.
 
 ----
 
