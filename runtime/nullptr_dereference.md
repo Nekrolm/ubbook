@@ -160,6 +160,7 @@ public:
 
     int& operator[](int i)
     {
+        // разыменование указателя без проверки на null
         return *m_array[i];
     }
 private:
