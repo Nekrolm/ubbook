@@ -58,6 +58,7 @@
    4. [Переполненине буфера](runtime/array_overrun.md)
    5. [Сборщик мусора](runtime/garbage_collector.md)
    6. [RAII vs (N)RVO](runtime/rvo_vs_raii.md)
+   7. [Разыменование nullptr](runtime/nullptr_dereference.md)
 7. Происхождение указателей
    1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
 
