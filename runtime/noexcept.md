@@ -84,6 +84,24 @@ void throw_smth() {
 Не забывайте писать негативные тесты. Без них
 можно проморгать появление ложного `noexcept` и получить `std::terminate` на боевом стенде.
 
+Также обратите внимание на тонкий и неприятный нюанс: если вам ну очень сильно надо кидать исключения из деструктора, обязательно явно пишите в его объявлении `noexcept(false)`. По умолчанию все ваши функции и методы помечены неявно `noexcept(false)`, но для деструкторов в C++ сделано исключение. Они неявно помечены `noexcept(true)`. [Так что](https://godbolt.org/z/5jo95d):
+
+```C++
+struct SoBad {
+    // invoke std::terminate
+    ~SoBad() {
+        throw std::runtime_error("so bad dctor");
+    }
+};
+
+struct  NotSoBad {
+    // OK
+    ~NotSoBad() noexcept(false) {
+        throw std::runtime_error("not so bad dctor");
+    }
+};
+```
+
 ## Полезные ссылки
 1. https://en.cppreference.com/w/cpp/language/noexcept
 2. https://en.cppreference.com/w/cpp/language/noexcept_spec
