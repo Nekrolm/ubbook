@@ -51,6 +51,7 @@
    4. [std::move](syntax/move.md)
    5. [std::enable_if/std::void_t](syntax/enable_if_void_t.md)
    6. [Потерянный return](syntax/missing_return.md)
+   7. [Эллипсис и функции с произвольным числом аргументов](syntax/c_variadic.md)
 6. Исполнение программы
    1. [Бесконечные циклы](runtime/endless_loop.md)
    2. [Рекурсия](runtime/recursion.md)
