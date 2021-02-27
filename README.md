@@ -60,6 +60,7 @@
    5. [Сборщик мусора](runtime/garbage_collector.md)
    6. [RAII vs (N)RVO](runtime/rvo_vs_raii.md)
    7. [Разыменование nullptr](runtime/nullptr_dereference.md)
+   8. [Static initialization order fiasco](runtime/static_initialization_order_fiasco.md)
 7. Происхождение указателей
    1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
 
