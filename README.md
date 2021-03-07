@@ -65,6 +65,7 @@
    1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
 8. Параллелизм
    1. [Race condition](concurrency/race_condition.md)
+   2. [shared_ptr](concurrency/shared_ptr.md)
 
 
 ---
