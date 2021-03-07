@@ -66,6 +66,7 @@
 8. Параллелизм
    1. [Race condition](concurrency/race_condition.md)
    2. [shared_ptr](concurrency/shared_ptr.md)
+   3. [thread::join](concurrency/jthread.md)
 
 
 ---
