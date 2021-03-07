@@ -68,6 +68,55 @@ int main() {
 Конечно же, тут ошибка намеренная и исправляется легко заменой `bool` на `std::atomic<bool>`.
 Но в реальной кодовой базе допустить race condition просто, а исправить сложнее.
 
+Однажды я написал что-то подобное:
+
+```C++
+enum Task {
+    done,
+    hello
+};
+std::queue<Task> task_queue;
+std::mutex mutex;
+
+std::jthread t1 { [&]{
+    std::size_t cnt_miss = 0;
+    while (true) {
+        if (!task_queue.empty()) {
+            auto task = [&] {
+                std::scoped_lock lock{mutex};
+                auto t = task_queue.front();
+                task_queue.pop();
+                return t;
+            }();
+            if (task == done) {
+                break;
+            } else {
+                std::cout << "hello\n";
+            }
+        } else {
+            ++cnt_miss;
+        }
+    }
+    std::cout << "count miss: " << cnt_miss << "\n";
+} };
+
+std::jthread t2 { [&] {
+        std::this_thread::sleep_for(500ms);
+        {
+            std::scoped_lock lock{mutex};
+            task_queue.push(done);
+        }
+    }
+};
+```
+
+И оно прекрасно работало, пока код тестировался будучи собранным одним компилятором.
+Но при переносе на другую платформу с другим компилятором — [все сломалось](https://godbolt.org/z/f8f8xq).
+
+Если вы сразу поняли причину, то поздравляю. Иначе — обратите внимание на безобидный метод `empty`. Который «совершенно точно ничего не меняет» и «да ладно, как там вообще может нарушиться консистентность данных?!» 
+
+----
+
 В поиске проблем с доступом к объектам из разных потоков вам помогут статические анализаторы и санитайзеры: например, tsan для gcc/clang (`-fsanitize=thread`). Насколько мне известно, текущая реализация tsan (2021 год) не дружит с asan (address sanitized). Так что не выйдет махом искать и race сondition, и обычные ошибки доступа к памяти с нарушением lifetime.
 
 
