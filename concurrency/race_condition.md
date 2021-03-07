@@ -39,7 +39,7 @@ int main() {
     int add_ms = 0;
     std::cin >> add_ms;
 
-    std::jthread t1 { [&]{
+    std::jthread t1 { [&] {
         std::size_t cnt = 0;
         while (!terminated) {
             ++cnt;
@@ -48,11 +48,10 @@ int main() {
     } };
 
     std::jthread t2 { [&] {
-            std::this_thread::sleep_for(500ms + 
-                                        std::chrono::milliseconds(add_ms));
-            terminated = true;
-        }
-    };
+        std::this_thread::sleep_for(500ms + 
+                                    std::chrono::milliseconds(add_ms));
+        terminated = true;
+    } };
 }
 ```
 
@@ -78,7 +77,7 @@ enum Task {
 std::queue<Task> task_queue;
 std::mutex mutex;
 
-std::jthread t1 { [&]{
+std::jthread t1 { [&] {
     std::size_t cnt_miss = 0;
     while (true) {
         if (!task_queue.empty()) {
@@ -101,13 +100,12 @@ std::jthread t1 { [&]{
 } };
 
 std::jthread t2 { [&] {
-        std::this_thread::sleep_for(500ms);
-        {
-            std::scoped_lock lock{mutex};
-            task_queue.push(done);
-        }
+    std::this_thread::sleep_for(500ms);
+    {
+        std::scoped_lock lock{mutex};
+        task_queue.push(done);
     }
-};
+} };
 ```
 
 И оно прекрасно работало, пока код тестировался будучи собранным одним компилятором.
