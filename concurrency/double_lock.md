@@ -53,12 +53,12 @@ bool empty() const {
 }
 
 void push(T x) {
-    std::scoped_lock lock {mutex_ };
+    std::scoped_lock lock { mutex_ };
     ...
 }
 
 std::optional<T> pop() {
-    std::scoped_lock lock {mutex_ };
+    std::scoped_lock lock { mutex_ };
     if (empty()) { // ! ПОВТОРНЫЙ ЗАХВАТ !
         return std::nullopt;
     }
