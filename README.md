@@ -53,6 +53,7 @@
    6. [Потерянный return](syntax/missing_return.md)
    7. [Эллипсис и функции с произвольным числом аргументов](syntax/c_variadic.md)
    8. [`operator[] ` ассоциативных котейнеров](syntax/map_subscript.md)
+   9. [потоки ввода/вывода](syntax/iostreams.md)
 6. Исполнение программы
    1. [Бесконечные циклы](runtime/endless_loop.md)
    2. [Рекурсия](runtime/recursion.md)
