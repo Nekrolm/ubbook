@@ -66,6 +66,7 @@
    8. [Static initialization order fiasco](runtime/static_initialization_order_fiasco.md)
 7. Происхождение указателей
    1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
+   2. [Placement `operator new[]`](pointer_prominence/array_placement_new.md)
 8. Параллелизм
    1. [Race condition](concurrency/race_condition.md)
    2. [shared_ptr](concurrency/shared_ptr.md)
