@@ -191,8 +191,10 @@ void demo_2(void) PROC                           ; demo_2, COMDAT
     mov     ecx, OFFSET std::basic_ostream<char,std::char_traits<char> > std::cout ; std::cout
     call    std::basic_ostream<char,std::char_traits<char> > & std::basic_ostream<char,std::char_traits<char> >::operator<<(int) ; std::basic_ostream<char,std::char_traits<char> >::operator<<
     ret     0
-```   
+```
+
 Код, собранный GCC печатает 11. MSVC — 22.
+
 -----------------
 
 ODR violation почти всегда ходит вместе с проблемами обновлений и слома ABI:
