@@ -74,6 +74,7 @@
    2. [shared_ptr](concurrency/shared_ptr.md)
    3. [thread::join](concurrency/jthread.md)
    4. [Повторный захват мьютекса](concurrency/double_lock.md)
+   5. [Signal-unsafe](concurrency/signal_unsafe.md)
 
 
 ---
