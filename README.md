@@ -56,6 +56,7 @@
    8. [`operator[] ` ассоциативных котейнеров](syntax/map_subscript.md)
    9. [потоки ввода/вывода](syntax/iostreams.md)
    10. [`operator ,`](syntax/comma_operator.md)
+   11. [function-try-block](syntax/function-try-catch.md)
 6. Исполнение программы
    1. [Бесконечные циклы](runtime/endless_loop.md)
    2. [Рекурсия](runtime/recursion.md)

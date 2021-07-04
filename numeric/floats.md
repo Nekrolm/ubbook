@@ -26,6 +26,38 @@
 constexpr uint16_t x = 1234567.0; // CE, undefined behavior
 ```
 
+Обратное преобразование, из целочисленных типов во `float`/`double`, также имеет свои подвохи, не связанные с неопределенным поведением: большие по абсолютной величине целые числа [теряют точность](https://godbolt.org/z/xnr5rMGKf)
+
+```C++
+static_assert(
+    static_cast<float>(std::numeric_limits<int>::max()) == 
+    static_cast<float>(static_cast<long long>(std::numeric_limits<int>::max()) + 1) // OK
+);
+
+static_assert(
+    static_cast<double>((1LL << 53) - 1) == 
+    static_cast<double>(1LL << 53)  // fire!
+);
+
+static_assert(
+    static_cast<double>((1LL << 54) - 1) == 
+    static_cast<double>(1LL << 54) // OK
+);
+
+static_assert(
+    static_cast<double>((1LL << 55) - 1) == 
+    static_cast<double>(1LL << 55) // OK
+);
+
+static_assert(
+    static_cast<double>((1LL << 56) - 1) == 
+    static_cast<double>(1LL << 56) // OK
+);
+```
+
+В качестве домашнего задания читателю предлагается самостоятельно сформулировать, почему никогда нельзя хранить деньги в типах с плавающей запятой.
+
+
 ### Плавающая точка и шаблоны
 
 Вещественные числа до C++20 нельзя было использовать в качестве параметров-значений в шаблонах. Теперь же можно. Правда, ожидать, что вы насчитаете в run-time и в compile-time одно и то же — [не стоит](https://godbolt.org/z/q55891).
