@@ -76,6 +76,7 @@
    3. [thread::join](concurrency/jthread.md)
    4. [Повторный захват мьютекса](concurrency/double_lock.md)
    5. [Signal-unsafe](concurrency/signal_unsafe.md)
+   6. [condition_variable](concurrency/condition_variable.md)
 
 
 ---
