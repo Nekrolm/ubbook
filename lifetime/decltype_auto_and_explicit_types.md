@@ -62,8 +62,8 @@ class MapWrapper : private std::map<K, V> {
 public:
     template <class Predicate>
     const std::pair<K, V>& find_if_or_throw(Predicate p) const {
-        auto item = std::find_if(cbegin(), cend(), p);
-        if (item == cend()) {
+        auto item = std::find_if(this->cbegin(), this->cend(), p);
+        if (item == this->cend()) {
             throw std::runtime_error("not found");
         }
         return *item;
