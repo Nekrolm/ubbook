@@ -85,7 +85,7 @@ int main() {
 void f(float&& x) { std::cout << "float " << x << "\n";  }
 void f(int&& x) { std::cout << "int " << x << "\n";  }
 void g(auto&& v) { f(v); } // C++20
-// tempate <class T> g(T v) { f(v); }
+// template <class T> void g(T v) { f(v); }
 int main() { 
     g(2);
     g(1.f);
