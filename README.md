@@ -71,6 +71,7 @@
    10. [Тривиальные типы и ABI](runtime/trivial_types_and_ABI.md)
    11. [Неинициализированные переменные](runtime/uninitialized.md)
    12. [Ranges. Unreachable sentinel](runtime/unreachable_sentinel.md)
+   13. [Невиртуальные виртуальные функции](runtime/virtual_functions.md)
 7. Происхождение указателей
    1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
    2. [Placement `operator new[]`](pointer_prominence/array_placement_new.md)
