@@ -63,7 +63,7 @@
    1.  [Бесконечные циклы](runtime/endless_loop.md)
    2.  [Рекурсия](runtime/recursion.md)
    3.  [Ложный noexcept](runtime/noexcept.md)
-   4.  [Переполненине буфера](runtime/array_overrun.md)
+   4.  [Переполнение буфера](runtime/array_overrun.md)
    5.  [Сборщик мусора](runtime/garbage_collector.md)
    6.  [RAII vs (N)RVO](runtime/rvo_vs_raii.md)
    7.  [Разыменование nullptr](runtime/nullptr_dereference.md)
@@ -81,7 +81,7 @@
    1. [Race condition](concurrency/race_condition.md)
    2. [shared_ptr](concurrency/shared_ptr.md)
    3. [thread::join](concurrency/jthread.md)
-   4. [Повторный захват мьютекса](concurrency/double_lock.md)
+   4. [Повторный захват mutex](concurrency/double_lock.md)
    5. [Signal-unsafe](concurrency/signal_unsafe.md)
    6. [condition_variable](concurrency/condition_variable.md)
 
