@@ -47,7 +47,7 @@ std::jthread t2 { [&] {
 
 Если вам надо менять указатель из разных потоков, то вам нужен `std::atomic<std::shared_ptr<T>>` (C++20). Либо использовать функции ` std::atomic_load`/`std::atomic_store` и прочие — у них есть специальные перегрузки для `shared_ptr`.
 
-C `std::weak_ptr` все то же самое.
+С `std::weak_ptr` все то же самое.
 
 ## Полезные ссылки
 1. https://stackoverflow.com/questions/9127816/stdshared-ptr-thread-safety-explained
