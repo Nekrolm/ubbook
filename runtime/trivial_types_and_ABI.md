@@ -37,7 +37,7 @@ struct Point {
 
 Почему?
 
-Это измение сломало ABI.
+Это изменение сломало ABI.
 
 В С++ все типы делятся на тривиальные и нетривиальный. Тривиальные, в свою очередь, бывают еще и в разных аспектах тривиальными. В общем случае тривиальность позволяет не генерировать дополнительный код, чтобы что-то сделать.
 
@@ -70,7 +70,7 @@ struct TNCopyable {
 
 static_assert(!std::is_trivially_copyable_v<TNCopyable>);
 
-// Здесь будет возврат через регистр rax. TCopyably в него как раз помещается
+// Здесь будет возврат через регистр rax. TCopyable в него как раз помещается
 extern TCopyable test_tcopy(const TCopyable& c) {
     return {c.x *5, c.y * 6};
 } 
@@ -134,7 +134,7 @@ extern TNPoint zero_npoint() {
 } 
 ```
 
-```
+```asm
 zero_point():                        # @zero_point()
         xorps   xmm0, xmm0
         ret
