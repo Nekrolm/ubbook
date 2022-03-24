@@ -54,7 +54,7 @@
    5. [std::enable_if/std::void_t](syntax/enable_if_void_t.md)
    6. [Потерянный return](syntax/missing_return.md)
    7. [Эллипсис и функции с произвольным числом аргументов](syntax/c_variadic.md)
-   8. [`operator[] ` ассоциативных котейнеров](syntax/map_subscript.md)
+   8. [`operator[] ` ассоциативных контейнеров](syntax/map_subscript.md)
    9. [потоки ввода/вывода](syntax/iostreams.md)
    10. [`operator ,`](syntax/comma_operator.md)
    11. [function-try-block](syntax/function-try-catch.md)

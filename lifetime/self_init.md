@@ -64,7 +64,7 @@ ExtremelyLongClassName y {
     }()
 };
 
-ExtremelyLongСlassName z {
+ExtremelyLongClassName z {
     [] ()-> decltype(z.Default()) { // Ok, well-defined
         // сложные вычисления
         return 1;
