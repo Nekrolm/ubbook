@@ -232,8 +232,8 @@ struct Numbers {
 
     // И нам поступают запросы на поиск позиции элемента, заведомо находящегося в векторе
     // size_t p = 7;
-    assert(p < perm.size())
-    return std::ranges_find(perm.begin(), std::unreachable_sentinel, p) - perm.begin();
+    assert(p < perm.size());
+    return std::ranges::find(perm.begin(), std::unreachable_sentinel, p) - perm.begin();
 ```
 
 Очевидно, это крайне небезопасный ход. К которому стоит прибегать только в случае, если вы точно все проверили и эта оптимизация критична и необходима. Если в примере выше по какой-то причине будет запрошен элемент, не присутствующий в векторе, мы получим [неопределенное поведение](https://godbolt.org/z/459Y68PcW).
