@@ -46,6 +46,7 @@
    6. [std::vector и инвалидация ссылок](lifetime/vector_invalidation.md)
    7. [Висячие ссылки в лямбдах](lifetime/lambda_capture.md)
    8. [Создание кортежей](lifetime/tuple_creation.md)
+   9. [Внезапная мутабельность](lifetime/unexpected_mutability.md)
 5. Неработающий синтаксис и стандартная библиотека
    1. [Most Vexing Parse](syntax/most_vexing_parse.md)
    2. [Const](syntax/const_launder.md)
@@ -101,4 +102,4 @@
 
 **Нельзя** использовать в платных сервисах или взимать плату за обучение по этим материалам.
 
-_Copyright 2020-2021 Dmitry Sviridkin_
+_Copyright 2020-2022 Dmitry Sviridkin_
