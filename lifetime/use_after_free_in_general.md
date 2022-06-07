@@ -259,7 +259,7 @@ int main() {
 }
 ```
 
-Или с [использованием](https://godbolt.org/z/Yc9MWj) типов стандартной бибилиотеки:
+Или с [использованием](https://godbolt.org/z/Yc9MWj) типов стандартной библиотеки:
 ```C++
 int main() {
     using namespace std::literals;
