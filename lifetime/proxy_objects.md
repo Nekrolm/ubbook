@@ -38,8 +38,8 @@ auto pop_last(std::vector<T>& v) {
 В стандартной библиотеке C++ есть самые разные proxy-объекты (иногда не чистых proxy, а c добавлением функционала):
     
 - `std::reference_wrapper`
-- `std::in_ptr, std::inout_ptr` в C++20
-- `std::osyncstream`
+- `std::in_ptr, std::inout_ptr` в C++23
+- `std::osyncstream` в C++20
 - арифметические операции над [valarray](https://en.cppreference.com/w/cpp/numeric/valarray) могут возвращать proxy-объекты.
 - `std::vector<bool>::reference`
 
