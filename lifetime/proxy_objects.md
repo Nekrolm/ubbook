@@ -40,9 +40,8 @@ auto pop_last(std::vector<T>& v) {
 - `std::reference_wrapper`
 - `std::in_ptr, std::inout_ptr` в C++20
 - `std::osyncstream`
-- `std::vector<bool>::reference`
 - арифметические операции над [valarray](https://en.cppreference.com/w/cpp/numeric/valarray) могут возвращать proxy-объекты.
-
+- `std::vector<bool>::reference`
 
 Вот последний нам и нужен.
 
