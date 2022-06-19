@@ -47,6 +47,7 @@
    7. [Висячие ссылки в лямбдах](lifetime/lambda_capture.md)
    8. [Создание кортежей](lifetime/tuple_creation.md)
    9. [Внезапная мутабельность](lifetime/unexpected_mutability.md)
+   10. [Proxy-объекты и ссылки](lifetime/proxy_objects.md)
 5. Неработающий синтаксис и стандартная библиотека
    1. [Most Vexing Parse](syntax/most_vexing_parse.md)
    2. [Const](syntax/const_launder.md)
