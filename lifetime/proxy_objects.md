@@ -104,14 +104,14 @@ auto pop_last(std::vector<bool>& v) {
 int main() {
     std::vector<bool> v;
     v.push_back(false);
-    std::cout << v[0] << "\t";
+    std::cout << v[0] << " ";
     const auto b = v[0];
     auto c = b;
     c = true;
     std::cout << c << " " << b;
 }
 ```
-Данный код [выводит](https://godbolt.org/z/WT7Es9Gve) `0 1 1`.
+Данный код [выводит](https://godbolt.org/z/ncxEh39M7) `0 1 1`.
 Несмотря на `const`, значение `b` поменялось. Но ведь это же очевидно, да? Ведь `b` это не ссылка, но объект, который ведет себя как ссылка!
 
 Этот код станет еще более внезапным и интересным в C++23: если при переносе новинок в
