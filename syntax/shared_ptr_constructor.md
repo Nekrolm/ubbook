@@ -134,6 +134,7 @@ public:
     ...
 
 };
+```
 
 И [работает](https://godbolt.org/z/Yqsq7Mr7c).
 
