@@ -250,7 +250,7 @@ std::cout << unit.back().id <<  "";
     using storage = std::aligned_storage_t<sizeof(Unit), alignof(Unit)>;
     storage s;
     auto p = new (&s) Unit{1,2};
-    std::cout << rp->id << "\n";
+    std::cout << p->id << "\n";
     p->~Unit();
     p = new (&s) Unit{2,2};
     std::cout << p->id << "\n";
