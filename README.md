@@ -64,6 +64,7 @@
    12. [Пустые структуры и типы нулевого размера](syntax/zero_size.md)
    13. [NULL-терминированные строки](syntax/null_terminated_string.md)
    14. [Конструирование std::shared_ptr](syntax/shared_ptr_constructor.md)
+   15. [std::aligned_storage](syntax/aligned_storage.md)
 6. Исполнение программы
    1.  [Бесконечные циклы](runtime/endless_loop.md)
    2.  [Рекурсия](runtime/recursion.md)
