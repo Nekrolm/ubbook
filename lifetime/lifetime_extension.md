@@ -232,5 +232,6 @@ int main() {
 
 
 ## Полезные ссылки
-https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p2718r0.html
-https://fasterthanli.me/articles/a-rust-match-made-in-hell
+1. https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p2718r0.html
+2. https://fasterthanli.me/articles/a-rust-match-made-in-hell
+3. https://en.cppreference.com/w/cpp/language/lifetime
