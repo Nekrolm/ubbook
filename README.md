@@ -50,6 +50,7 @@
    9. [Внезапная мутабельность](lifetime/unexpected_mutability.md)
    10. [Proxy-объекты и ссылки](lifetime/proxy_objects.md)
    11. [use-after-move](lifetime/use-after-move.md)
+   12. [lifetime extension](lifetime/lifetime_extension.md)
 5. Неработающий синтаксис и стандартная библиотека
    1. [Most Vexing Parse](syntax/most_vexing_parse.md)
    2. [Const](syntax/const_launder.md)

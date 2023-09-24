@@ -152,6 +152,11 @@ for (auto cont = expr; auto x : cont)
 - Использовать `std::ranges::for_each`
 - Не использовать range-based for в C++, пока его не починят
 
+
+## С++23
+
+Продление времени жизни объекта в заголовке `range-based-for` было наконец-то исправлено. И теперь получить висячую ссылку стало тяжелее. Но теперь стало проще получить другую [проблему](lifetime_extension.md)
+
 ## Полезные ссылки
 1. https://en.cppreference.com/w/cpp/algorithm/ranges/for_each
 2. https://en.cppreference.com/w/cpp/language/range-for
