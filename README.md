@@ -84,6 +84,7 @@
    14. [Ranges. Unreachable sentinel](runtime/unreachable_sentinel.md)
    15. [Невиртуальные виртуальные функции](runtime/virtual_functions.md)
    16. [Variable length array](runtime/vla.md)
+   17. [ODR violation и разделяемые библиотеки](runtime/dll_and_odr_violation.md)
 7. Происхождение указателей
    1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
    2. [Placement `operator new[]`](pointer_prominence/array_placement_new.md)
