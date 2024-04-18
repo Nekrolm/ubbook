@@ -105,11 +105,11 @@ template <SignedInteger I>
 ErrorOrInteger<I> add(I a,    // выключаем вывод параметра шаблона по
                       std::type_identity_t<I> b) // второму аргументу
 {
-    if (b > 0 && a > std::numeric_limits<I>::max - b) {
+    if (b > 0 && a > std::numeric_limits<I>::max() - b) {
         // положительное переполнение
         return ArithmeticError::Overflow;
     }
-    if (b < 0 && a < std::numeric_limits<I>::min - b) {
+    if (b < 0 && a < std::numeric_limits<I>::min() - b) {
         // отрицательное переполнение
         return ArithmeticError::Overflow;
     }
@@ -118,11 +118,11 @@ ErrorOrInteger<I> add(I a,    // выключаем вывод параметр�
 
 template <SignedInteger I>
 ErrorOrInteger<I> sub(I a, std::type_identity_t<I> b) {
-    if (b < 0 && a > std::numeric_limits<I>::max + b) {
+    if (b < 0 && a > std::numeric_limits<I>::max() + b) {
         // положительное переполнение
         return ArithmeticError::Overflow;
     }
-    if (b > 0 && a < std::numeric_limits<I>::min + b) {
+    if (b > 0 && a < std::numeric_limits<I>::min() + b) {
         // отрицательное переполнение
         return ArithmeticError::Overflow;
     }
@@ -137,21 +137,21 @@ ErrorOrInteger<I> mul(I a, std::type_identity_t<I> b) {
 
    if (a > 0) {
        if (b > 0) {
-           if (a > std::numeric_limits<I>::max / b) {
+           if (a > std::numeric_limits<I>::max() / b) {
               return ArithmeticError::Overflow;
            }
        } else {
-           if (b < std::numeric_limits<I>::min / a) {
+           if (b < std::numeric_limits<I>::min() / a) {
               return ArithmeticError::Overflow;
             }
       }
    } else {
       if (b > 0) {
-          if (a < std::numeric_limits<I>::min / b) {
+          if (a < std::numeric_limits<I>::min() / b) {
               return ArithmeticError::Overflow;
           }
       } else {
-          if (b < std::numeric_limits<I>::max / a) {
+          if (b < std::numeric_limits<I>::max() / a) {
               return ArithmeticError::Overflow;
           }
       }
@@ -165,7 +165,7 @@ ErrorOrInteger<I> div(I a, std::type_identity_t<I> b) {
       return ArithmeticError::ZeroDivision;
   }
 
-  if (a == std::numeric_limits<I>::min && b == -1) {
+  if (a == std::numeric_limits<I>::min() && b == -1) {
       // диапазон [min, max] несимметричный относительно 0.
       // abs(min) > max — будет переполнение
       return ArithmeticError::Overflow;
