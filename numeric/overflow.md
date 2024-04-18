@@ -74,6 +74,114 @@ int main() {
 ```
 Если раскомментировать объявление `buf`, то предупреждение [пропадет](https://godbolt.org/z/cK483MnP3) (GCC 13.2)
 
+----
+
+Другой, возможно, более известный и иногда полезный пример оптимизации, которую такое неопределенное поведение упрощает для компилятора -- сворачивать известные суммы.
+
+Например, при суммировании арифметических прогрессий и некоторых других известных рядов, Clang 12, генерирует совершенно разный код для знаковых и беззнаковых чисел:
+
+```C++
+// https://godbolt.org/z/oE7q6WjTv
+// суммируем квадраты от 1 до N
+int64_t summate_squares(int64_t n) {
+    int64_t sum = 0;
+    for (int64_t i = 1; i <= n; ++i) {
+        sum += i * i;
+    };
+    return sum;
+}
+
+/* Tут нет цикла: используется известная формула (N * (N + 1)) * (2N + 1) / 6, 
+   но довольно сложным способом
+summate_squares(long):                   # @summate_squares(long)
+        test    rdi, rdi
+        jle     .LBB2_1
+        lea     rax, [rdi - 1]
+        lea     rcx, [rdi - 2]
+        mul     rcx
+        mov     r8, rax
+        mov     rsi, rdx
+        lea     rcx, [rdi - 3]
+        mul     rcx
+        imul    ecx, esi
+        add     edx, ecx
+        shld    rdx, rax, 63
+        movabs  rax, 6148914691236517206
+        shld    rsi, r8, 63
+        imul    rax, rdx
+        lea     rcx, [rsi + 4*rsi]
+        add     rcx, rax
+        lea     rax, [rcx + 4*rdi]
+        add     rax, -3
+        ret
+.LBB2_1:
+        xor     eax, eax
+        ret
+*/
+
+uint64_t usummate_squares(uint64_t n) {
+    uint64_t sum = 0;
+    for (uint64_t i = 1; i <= n; ++i) {
+        sum += i * i;
+    };
+    return sum;
+}
+/* А тут цикл есть: переполнение беззнаковых определено и требует обработки
+usummate_squares(unsigned long):                  # @usummate_squares(unsigned long)
+        test    rdi, rdi
+        je      .LBB3_1
+        mov     ecx, 1
+        xor     eax, eax
+.LBB3_4:                                # =>This Inner Loop Header: Depth=1
+        mov     rdx, rcx
+        imul    rdx, rcx
+        add     rax, rdx
+        add     rcx, 1
+        cmp     rcx, rdi
+        jbe     .LBB3_4
+        ret
+.LBB3_1:
+        xor     eax, eax
+        ret
+*/
+```
+
+GCC 13 на данный момент *(2024 год)* в принципе [не делает](https://godbolt.org/z/xjf7zj768) таких оптимизаций по умолчанию. При этом последнии версии Clang 18
+уже способны свернуть цикл суммирования квадратов и для беззнаковых:
+
+```asm
+# https://godbolt.org/z/WqaeaPjfe
+usummate_squares(unsigned long):                  # @usummate_squares(unsigned long)
+        test    rdi, rdi
+        je      .LBB3_1
+        inc     rdi
+        cmp     rdi, 3
+        mov     r8d, 2
+        cmovae  r8, rdi
+        lea     rax, [r8 - 2]
+        lea     rcx, [r8 - 3]
+        mul     rcx
+        mov     rsi, rax
+        mov     rcx, rdx
+        lea     rdi, [r8 - 4]
+        mul     rdi
+        imul    edi, ecx
+        add     edx, edi
+        shld    rdx, rax, 63
+        movabs  rax, 6148914691236517206
+        shld    rcx, rsi, 63
+        imul    rax, rdx
+        lea     rcx, [rcx + 4*rcx]
+        add     rcx, rax
+        lea     rax, [rcx + 4*r8]
+        add     rax, -7
+        ret
+.LBB3_1:
+        xor     eax, eax
+        ret
+```
+*Читатели, искушенные в теории колец вычетов, могут для беззнаковой версии написать более простой и короткий ассемблерный код в качестве упражнения (нужно лишь правильно поделить на 6)*
+
 --------
 
 Корректные проверки переполнения в арифметических операциях намного сложнее чем просто смена знака.
