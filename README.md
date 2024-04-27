@@ -70,6 +70,7 @@
    16. [(Не)явное приведение типов](syntax/explicit_but_implicit.md)
    17. [std::ranges::views](syntax/ranges_views_lazy.md)
    18. [функции стантарной библиотеки как параметры](syntax/function_pass_and_address_restriction.md)
+   19. [Многомерный operator[]](syntax/multidimensional_subscript.md)
 6. Исполнение программы
    1.  [Бесконечные циклы](runtime/endless_loop.md)
    2.  [Рекурсия](runtime/recursion.md)
