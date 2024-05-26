@@ -1,6 +1,4 @@
-# Ружье достаточной огневой мощи, чтобы на нем повеситься
-
-## Путеводитель C++ программиста по неопределенному поведению
+# Путеводитель C++ программиста по неопределенному поведению
 
 #### *Паникуй!*
 
@@ -51,27 +49,29 @@
    10. [Proxy-объекты и ссылки](lifetime/proxy_objects.md)
    11. [use-after-move](lifetime/use-after-move.md)
    12. [lifetime extension](lifetime/lifetime_extension.md)
-5. Неработающий синтаксис и стандартная библиотека
+5. (Не)работающий синтаксис
    1. [Most Vexing Parse](syntax/most_vexing_parse.md)
    2. [Const](syntax/const_launder.md)
-   3. [Конструкторы контейнеров](syntax/stl_constructors.md)
-   4. [std::move](syntax/move.md)
-   5. [std::enable_if/std::void_t](syntax/enable_if_void_t.md)
-   6. [Потерянный return](syntax/missing_return.md)
-   7. [Эллипсис и функции с произвольным числом аргументов](syntax/c_variadic.md)
-   8. [`operator[] ` ассоциативных контейнеров](syntax/map_subscript.md)
-   9. [потоки ввода/вывода](syntax/iostreams.md)
-   10. [`operator ,`](syntax/comma_operator.md)
-   11. [function-try-block](syntax/function-try-catch.md)
-   12. [Пустые структуры и типы нулевого размера](syntax/zero_size.md)
-   13. [NULL-терминированные строки](syntax/null_terminated_string.md)
-   14. [Конструирование std::shared_ptr](syntax/shared_ptr_constructor.md)
-   15. [std::aligned_storage](syntax/aligned_storage.md)
-   16. [(Не)явное приведение типов](syntax/explicit_but_implicit.md)
-   17. [std::ranges::views](syntax/ranges_views_lazy.md)
-   18. [функции стантарной библиотеки как параметры](syntax/function_pass_and_address_restriction.md)
-   19. [Многомерный operator[]](syntax/multidimensional_subscript.md)
-6. Исполнение программы
+   3. [std::move](syntax/move.md)
+   4. [Потерянный return](syntax/missing_return.md)
+   5. [Эллипсис и функции с произвольным числом аргументов](syntax/c_variadic.md)
+   6. [`operator ,`](syntax/comma_operator.md)
+   7. [function-try-block](syntax/function-try-catch.md)
+   8. [Пустые структуры и типы нулевого размера](syntax/zero_size.md)
+   9. [(Не)явное приведение типов](syntax/explicit_but_implicit.md)
+   10. [Многомерный operator[]](syntax/multidimensional_subscript.md)
+6. Стандартная библиотека
+   1. [NULL-терминированные строки](standard_lib/null_terminated_string.md)
+   2. [Конструирование std::shared_ptr](standard_lib/shared_ptr_constructor.md)
+   3. [потоки ввода/вывода](standard_lib/iostreams.md)
+   4. [std::aligned_storage](standard_lib/aligned_storage.md)
+   5. [функции стантарной библиотеки как параметры](syntax/function_pass_and_address_restriction.md)
+   6. [std::ranges::views](standard_lib/ranges_views_lazy.md)
+   7. [`operator[] ` ассоциативных контейнеров](standard_lib/map_subscript.md)
+   8. [std::enable_if/std::void_t](standard_lib/enable_if_void_t.md)
+   9. [Конструкторы контейнеров](standard_lib/stl_constructors.md)
+   10. [std::uniform_int_distribution](standard_lib/uniform_int_distribution.md)
+7. Исполнение программы
    1.  [Бесконечные циклы](runtime/endless_loop.md)
    2.  [Рекурсия](runtime/recursion.md)
    3.  [Ложный noexcept](runtime/noexcept.md)
@@ -89,10 +89,10 @@
    15. [Невиртуальные виртуальные функции](runtime/virtual_functions.md)
    16. [Variable length array](runtime/vla.md)
    17. [ODR violation и разделяемые библиотеки](runtime/dll_and_odr_violation.md)
-7. Происхождение указателей
+8. Происхождение указателей
    1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
    2. [Placement `operator new[]`](pointer_prominence/array_placement_new.md)
-8. Параллелизм
+9. Параллелизм
    1. [Race condition](concurrency/race_condition.md)
    2. [shared_ptr](concurrency/shared_ptr.md)
    3. [thread::join](concurrency/jthread.md)
@@ -115,5 +115,12 @@
 Для копирования и иного воспроизведения **надо** получить согласие автора
 
 **Нельзя** использовать в платных сервисах или взимать плату за обучение по этим материалам.
+
+#### Ну и самое последнее примечание
+
+Черновое название этой работы, "Ружье достаточной огневой мощи, чтобы на нем повеситься", как могли догадаться искушенные читатели, было эдаким реверансом в сторону известного (но очень плохо состарившегося) сборника по C++ "Веревка достаточной длины, чтобы выстрелить себе в ногу" от Алана Голуба. Но, к сожалению, мы живем в нежном мире победивших алгоритмов ранжирования и надзорных органов, то и дело стремящихся кого-нибудь от чего-нибудь защитить. 
+
+Автор, конечно, очень бы хотел защитить всех от C++, и именно этому и служит данных сборник, но с заблокированным и пессимизированным репозиторием прогресса в этом направлении не будет.
+
 
 _Copyright 2020-2024 Dmitry Sviridkin_
