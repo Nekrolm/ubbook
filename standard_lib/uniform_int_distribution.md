@@ -56,7 +56,7 @@ Throughout this subclause [rand], the effect of instantiating a template:
 that has a template type parameter named UIntType is undefined unless the corresponding template argument is cv-unqualified and is one of unsigned short, unsigned int, unsigned long, or unsigned long long.
 ```
 
-Подставлять `uint8_t` в `std::uniform_int_distribution` стандартом не разрешается под стахом неопределенных эффектов.
+Подставлять `uint8_t` в `std::uniform_int_distribution` стандартом не разрешается под страхом неопределенных эффектов.
 
 Это, конечно, совершенно нелепо, и в 2013 году даже поднимался вопрос о принятии [defect report](https://cplusplus.github.io/LWG/issue2326), но его отклонили как not a defect и предложили написать proposal в стандарт, чтобы как-то это дело исправить... В общем по состоянию на 2024 год не исправили. Возможно, исправят в C++26. Или в C++29.
 
