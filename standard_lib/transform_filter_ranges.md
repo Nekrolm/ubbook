@@ -242,9 +242,104 @@ constexpr decltype(auto) operator*() const  noexcept(noexcept(invoke(*parent_->f
 
 ### Что делать
 
-Если вы очень любите стандартный библиотеку, то постарайтесь никогда не использовать `views::transfrom` в цепочках перед `filter`, `take_while`, `drop_while` и другими нетривиальными комбинаторами, которым нужен доступ к элементу. Или же постарайтесь дождаться появления в стандарте [`views::cache_last`](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p3138r0.html).
+Если вы очень любите стандартный библиотеку, то постарайтесь никогда не использовать `views::transfrom` в цепочках перед `filter`, `take_while`, `drop_while` и другими нетривиальными комбинаторами, которым нужен доступ к элементу. 
 
-Если вы используете `range-v3` от Эрика Ниблера, используйте `ranges::views::cache1` после `views::transform` ([пример](https://godbolt.org/z/xf6jW76eE)).
+Если вы используете `range-v3` от Эрика Ниблера, как совместимое со стандартной библиотекой решение, используйте `ranges::views::cache1` в конце цепочек `transform`, чтоб не выполнять их повторно.
+
+```C++
+// спасибо @sigasigasiga за предоставленный пример
+// https://godbolt.org/z/fxP8hEjqc
+auto printer = [](auto x) {
+    std::println("called");
+    return x;
+};
+
+auto with_cache = v
+    | ranges::views::transform(printer)
+    | ranges::views::cache1
+    | ranges::views::filter(is_even)
+;
+for(auto _ : with_cache);
+```
+
+В самой стандартной библиотеке подобный кэширующий [std::views::cache_last](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p3138r0.html) может появиться в C++26 или позже.
+
+Учитывайте, что в таком случае весь perfect forwarding заканчивается. В версии Эрика Ниблера возвращается rvalue ссылка, в предложенной std:: версии возвращается lvalue ссылка — может потребоваться дополнительное явное перемещение, если нужно избежать копирований.
+
+Также cache_last/cache1 создают дополнительные проблемы, если `transform` должен вернуть ссылку. Dы получите копию
+
+```C++
+// https://godbolt.org/z/fx3fqWqf8
+struct Student {
+    std::vector<int> grades;
+};
+
+auto condition = [](auto&& _) { return true; };
+
+std::vector<Student> v = { Student {  { 1, 2, 3, 4, 5, } } };
+
+std::println("address of grades before: {}\n", uintptr_t(v[0].grades.data()));
+
+auto to_vector = [](std::string&& s) -> std::vector<std::string> {
+    return {
+        std::move(s)
+    };
+};
+
+std::println("with cache:");
+for (auto&& grades : v 
+    | ranges::views::transform(&Student::grades) 
+    // access to grades may be costly (e.g. it's a searh in large Map)
+    // so we would like to cache the result
+    | ranges::views::cache1
+    | ranges::views::filter(condition)) {
+    
+    std::println("address of grades after: {}\n", uintptr_t(grades.data()));
+}
+
+std::println("without cache:");
+for (auto&& grades : v 
+    | ranges::views::transform(&Student::grades) 
+    | ranges::views::filter(condition)) {
+    
+    std::println("address of grades after: {}\n", uintptr_t(grades.data()));
+}
+
+/* possible result
+address of grades before: 35328752
+
+with cache:
+address of grades after: 35328688 // ! address changed !
+
+without cache:
+address of grades after: 35328752
+*/
+```
+Придется использовать указатели или `std::reference_wrapper`
+
+```C++
+// https://godbolt.org/z/vxb9jjvEs
+auto wrap_ref = [](auto& x) { return std::reference_wrapper { x };};
+auto unwrap_ref = [](auto ref) -> decltype(auto) { return ref.get(); };
+
+std::println("with cache:");
+for (auto&& grades : v 
+    | ranges::views::transform(&Student::grades) 
+    | ranges::views::transform(wrap_ref)
+    | ranges::views::cache1
+    | ranges::views::filter(condition) 
+    | ranges::views::transform(unwrap_ref)) {
+    std::println("address of grades after: {}\n", uintptr_t(grades.data()));
+}
+/*
+// possible output:
+address of grades before: 37319408
+with cache:
+address of grades after: 37319408 // ! same address, no copy
+*/
+```
+
+----
 
 Если вы не любите стандартную библиотеку, то можете реализовать свою собственную версию, используя дизайн итераторов Rust, Zig, Python (только без исключений) и других языков, где используется ровно один метод и передача по зачению
 
@@ -269,4 +364,5 @@ trait Iterator {
 
 1. [STL Concepts and Ranges](https://www.youtube.com/watch?v=8yV2ONeWXyI&t=1s)
 2. [Iterators and Ranges: Comparing C++ to D to Rust - Barry Revzin - [CppNow 2021]](https://www.youtube.com/watch?v=d3qY4dZ2r4w)
+3. [A Plan for C++26 Ranges](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2760r1.html)
 
