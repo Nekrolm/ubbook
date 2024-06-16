@@ -36,6 +36,7 @@
    2. [Числа с плавающей точкой](numeric/floats.md)
    3. [Integer promotion](numeric/integer_promotion.md)
    4. [char и знаковое расширение](numeric/char_sign_extension.md)
+   5. [Унарный минус для беззнаковых чисел](numeric/unsigned_unary_minus.md)
 4. Нарушения lifetime объектов
    1. [Висячие ссылки — общие случаи](lifetime/use_after_free_in_general.md)
    2. [Автовывод типов и висячие ссылки](lifetime/decltype_auto_and_explicit_types.md)
