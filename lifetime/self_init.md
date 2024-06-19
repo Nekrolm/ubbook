@@ -30,7 +30,7 @@ void fun(int y) {
 const int max_v = 10;
 
 void fun(int y) {
-   const int max_v = []{
+   const int max_v = [y]{
        // тут виден только глобальный max_v
        return std::min(max_v, y);
    }();
