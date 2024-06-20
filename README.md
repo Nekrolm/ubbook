@@ -66,7 +66,7 @@
    2. [Конструирование std::shared_ptr](standard_lib/shared_ptr_constructor.md)
    3. [потоки ввода/вывода](standard_lib/iostreams.md)
    4. [std::aligned_storage](standard_lib/aligned_storage.md)
-   5. [функции стантарной библиотеки как параметры](syntax/function_pass_and_address_restriction.md)
+   5. [функции стантарной библиотеки как параметры](standard_lib/function_pass_and_address_restriction.md)
    6. [std::ranges::views](standard_lib/ranges_views_lazy.md)
    7. [`operator[] ` ассоциативных контейнеров](standard_lib/map_subscript.md)
    8. [std::enable_if/std::void_t](standard_lib/enable_if_void_t.md)
