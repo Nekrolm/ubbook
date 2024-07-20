@@ -73,6 +73,7 @@
    9. [Конструкторы контейнеров](standard_lib/stl_constructors.md)
    10. [std::uniform_int_distribution](standard_lib/uniform_int_distribution.md)
    11. [std::ranges::transform | filter](standard_lib/transform_filter_ranges.md)
+   12. [vector::reserve и vector::resize](standard_lib/vector_resize_reserve.md)
 7. Исполнение программы
    1.  [Бесконечные циклы](runtime/endless_loop.md)
    2.  [Рекурсия](runtime/recursion.md)
