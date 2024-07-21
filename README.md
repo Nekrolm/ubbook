@@ -61,6 +61,7 @@
    8. [Пустые структуры и типы нулевого размера](syntax/zero_size.md)
    9. [(Не)явное приведение типов](syntax/explicit_but_implicit.md)
    10. [Многомерный operator[]](syntax/multidimensional_subscript.md)
+   11. [Операторы сравнения в C++20](syntax/comparison_operator_rewrite.md)
 6. Стандартная библиотека
    1. [NULL-терминированные строки](standard_lib/null_terminated_string.md)
    2. [Конструирование std::shared_ptr](standard_lib/shared_ptr_constructor.md)
