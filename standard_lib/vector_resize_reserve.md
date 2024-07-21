@@ -78,7 +78,10 @@ int main() {
 
 И вот здесь стоит на минуту остановиться и отвлечься.
 Я множество раз видел на самых разных технических форумах заявления вида:
-- С/C++ это языки для работы близко к железу. Undefined behavior это просто формальность. Есть программист знает, как работает память, как работает его программа и типы, он может эту ерунду игнорировать. И так далее.
+- С/C++ это языки для работы близко к железу. 
+- Undefined behavior это просто формальность. 
+- Есть программист знает, как работает память, как работает его программа и типы, он может эту ерунду игнорировать. 
+- И так далее.
 
 Случай с `reserve()` выше может быть использован в защиту такой спорной позиции.
 
@@ -102,7 +105,7 @@ LLVM может генерировать под x86 инструкцию `ud2` -
 
 ```Rust
 fn read(n: usize, mut reader:  impl std::io::Read) -> std::io::Result<(Vec<u8>, usize)> {
-    // Резервируем память. Она будет неинециализированной
+    // Резервируем память. Она будет неинициализированной
     let mut buf = Vec::<u8>::with_capacity(n);
     // unsafe Rust довольно сложен и формально здесь
     // нельзя напрямую создавать &mut [u8] на неинициализированную память
@@ -179,10 +182,10 @@ READ of size 1 at 0x504000000050 thread T0
 
 ```C++
 std::pair<std::unique_ptr<std::byte[]>, size_t> read_text(std::istream& in, size_t buffer_len) {
-    auto buffer = std::make_unique_for_overwrite<std::byte[]>(buffer_len);
-    in.read(reinterpret_cast<char*>(buffer.get()), buffer_len);
     // Выделяем default-инициализированный буфер, но default инициализация
     // массива тривиальных объектов это отсутствие инициализации.
+    auto buffer = std::make_unique_for_overwrite<std::byte[]>(buffer_len);
+    in.read(reinterpret_cast<char*>(buffer.get()), buffer_len);
     return {
         std::move(buffer), static_cast<size_t>(in.gcount())
     };
@@ -195,7 +198,7 @@ std::pair<std::unique_ptr<std::byte[]>, size_t> read_text(std::istream& in, size
 
 ### C++23. std::basic_string::resize_and_overwrite
 
-Да! Чудо случилось и в C++23 мы можем сделать почти также замечательно эффективно как в Rust. Но только для "строк". Но ведь по старой доброй традиции из С, у нас строки это просто последовательность байт...
+Да! Чудо случилось и в C++23 мы можем сделать почти так же замечательно эффективно как в Rust. Но только для "строк". Но ведь по старой доброй традиции из С, у нас строки это просто последовательность байт...
 
 ```C++
 // Придется написать немного СharTraits магии, если мы хотим использовать std::basic_string c типом std::byte
@@ -212,8 +215,8 @@ struct ByteTraits {
 
 std::basic_string<std::byte, ByteTraits> read_text(std::istream& in, size_t buffer_len) {
     std::basic_string<std::byte, ByteTraits> buffer;
-    buffer.resize_and_overwrite(buffer_len, [&](std::byte* buf, size_t len) {
-        in.read(reinterpret_cast<char*>(buf), buffer_len);
+    buffer.resize_and_overwrite(buffer_len, [&in](std::byte* buf, size_t len) {
+        in.read(reinterpret_cast<char*>(buf), len);
         return static_cast<size_t>(in.gcount());
     });
     
@@ -230,4 +233,4 @@ int main() {
 }
 ```
 
-И ура! Оно также [работает](https://godbolt.org/z/PGzasjbcn) как ожидается.
+И ура! Оно также [работает](https://godbolt.org/z/35qPW15nz) как ожидается.
