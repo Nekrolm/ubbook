@@ -63,13 +63,13 @@ for (const auto& r: records);
 А она у нас неявно взялась. Ведь неявное создание ссылок это ключевая особенность C++!
 ```C++
 template< class... Args >
-std::string format( std::format_string<Args...> fmt, Args&&... args );
+std::string format( std::format_string<Args...> fmt, Args&&... args ); // Вот они эти два коварных &&!
 ```
 
 ```C++
 std::cout << std::format("{} {} {}", r.data, r.status, r.value); // все три поля будут переданы по ссылке!
 ```
-Да, "универсальная ссылка" это все ссылка.
+Да, "универсальная ссылка" это все еще ссылка.
 
 В упакованное структуре поля не выровнены. Ссылки на них брать нельзя.
 
