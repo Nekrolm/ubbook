@@ -157,6 +157,33 @@ static_assert(sizeof(S1) == 0);
 И вот уже внезапно у нас в C++ структуры нулевого размера. Только C++ не стандартный.
 Каким образом такие структуры будет взаимодействовать с EBO — нужно читать в спецификации к GCC.
 
+## Не совсем пустые структуры
+
+Кстати об empty base optimization, на cppreference можно обнаружить сноску, что *oбычно* при наследовании от пустой структуры размер структуры-наследника не увеличивается. *Обычно*.
+
+Но вот и пример, когда происходит что-то необычное
+```C++
+#include <type_traits>
+
+struct EBO {};
+struct A : EBO {};
+struct B : EBO {};
+struct C : EBO {};
+
+static_assert(std::is_empty_v<A>);
+static_assert(std::is_empty_v<B>);
+static_assert(std::is_empty_v<C>);
+
+struct D : A, B, C {};
+static_assert(std::is_empty_v<D>);
+static_assert(sizeof(D) == 3);
+``` 
+[Под MSVC размер структуры `D` равен 1. А под Clang и GCC -- 3](https://godbolt.org/z/jqEPEvaYd).
+MSVC при этом, согласно стандарту, не прав, хотя его вариант почти всегда был бы предпочтителен
+```
+Empty base optimization is prohibited if one of the empty base classes is also the type or the base of the type of the first non-static data member, since the two base subobjects of the same type are required to have different addresses within the object representation of the most derived type.
+```
+
 ## tag dispatching
 
 Мы видели, что неаккуратное использование пустых структур приводит к увеличению размера других, не пустых структур.
