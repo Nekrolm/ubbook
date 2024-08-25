@@ -64,6 +64,7 @@
    10. [Многомерный operator[]](syntax/multidimensional_subscript.md)
    11. [Операторы сравнения в C++20](syntax/comparison_operator_rewrite.md)
    12. [Атрибут [[assume]]](syntax/assume.md)
+   13. [Конструкторы по умолчанию и = default](syntax/default_default_constructor.md)
 6. Стандартная библиотека
    1. [NULL-терминированные строки](standard_lib/null_terminated_string.md)
    2. [Конструирование std::shared_ptr](standard_lib/shared_ptr_constructor.md)
