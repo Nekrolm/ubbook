@@ -51,6 +51,7 @@
    11. [use-after-move](lifetime/use-after-move.md)
    12. [lifetime extension](lifetime/lifetime_extension.md)
    13. [C++20 direct initialization и ссылочные поля](lifetime/direct_initialization_references.md)
+   14. [Тернарный оператор](lifetime/ternary_operator.md)
 5. (Не)работающий синтаксис
    1. [Most Vexing Parse](syntax/most_vexing_parse.md)
    2. [Const](syntax/const_launder.md)
