@@ -97,9 +97,9 @@
    16. [Variable length array](runtime/vla.md)
    17. [ODR violation и разделяемые библиотеки](runtime/dll_and_odr_violation.md)
 8. Происхождение указателей
-   1. [Невалидные указатели](pointer_prominence/invalid_pointer.md)
-   2. [Placement `operator new[]`](pointer_prominence/array_placement_new.md)
-   3. [Невыровненные ссылки](pointer_prominence/misaligned_reference.md)
+   1. [Невалидные указатели](pointer_provenance/invalid_pointer.md)
+   2. [Placement `operator new[]`](pointer_provenance/array_placement_new.md)
+   3. [Невыровненные ссылки](pointer_provenance/misaligned_reference.md)
 9. Параллелизм
    1. [Race condition](concurrency/race_condition.md)
    2. [shared_ptr](concurrency/shared_ptr.md)
