@@ -68,10 +68,10 @@ INLINE int square(int num) {
 
 // square.c
 #define DEFINE_STUB 
-#include "foo.h"
+#include "square.h"
 
 // main.c
-#include "foo.h"
+#include "square.h"
 
 int main() {
     return square(5);
@@ -109,7 +109,7 @@ inline int cube(int num) {
 }
 
 // main.c
-#include "foo.h"
+#include "square.h"
 #include <stdlib.h>
 
 typedef int (*fn) (int);
