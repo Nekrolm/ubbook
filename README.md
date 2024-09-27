@@ -110,6 +110,7 @@
    4. [Повторный захват mutex](concurrency/double_lock.md)
    5. [Signal-unsafe](concurrency/signal_unsafe.md)
    6. [condition_variable](concurrency/condition_variable.md)
+   7. [Гонки за vptr](concurrency/vptr.md)
 
 
 ---
