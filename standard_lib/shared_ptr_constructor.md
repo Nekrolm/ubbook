@@ -116,10 +116,8 @@ class MyComponent {
 private:
     // access token
     struct private_ctor_token {
-        // только MyComponent может их создавать
-        friend class MyComponent;
-        private:
-            private_ctor_token() = default;
+        // только MyComponent cможет их создавать, явно обращаясь к конструктору по-умолчанию
+        explicit private_ctor_token() = default;
     };
 public:
     static auto make(Arg1 arg1, Arg2 arg2) -> std::shared_ptr<MyComponent> {
@@ -136,9 +134,9 @@ public:
 };
 ```
 
-И [работает](https://godbolt.org/z/Yqsq7Mr7c).
+И [работает](https://godbolt.org/z/57vo1jE3c).
 
-Стоит обратить внимание, что конструктор токена должен быть явно приватным, иначе всю нашу систему безопасности с приватным типом легко обойти вот так:
+Стоит обратить внимание, что конструктор токена должен быть помечен как `explicit`, иначе всю нашу систему безопасности с приватным типом легко обойти вот так:
 
 ```C++
 int main() {
