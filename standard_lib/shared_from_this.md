@@ -231,7 +231,23 @@ class Button: public Widget, public Gadget {
  
 ```
 
-Просто не делайте так. И всё будет хорошо.
+Неоднозначно, откуда метод брать. Но мы можем устранить неоднозначность
+
+```C++
+class Button: public Widget, public Gadget {
+    ...
+    void click() {
+        listener_->notify(EventType::Clicked, static_cast<Widget*>(this)->weak_from_this()); 
+    }
+};
+```
+Компилируется. Запускается. [Работает неправильно](https://godbolt.org/z/GEeczGxEE)... Опять nullptr.
+```
+Program returned: 0
+event received
+```
+
+Просто не используйте множественное наследование с `std::enabled_shared_from_this`. И всё будет хорошо. 
 
 Ладно. Договоримся, что нас устраивает результат. Мы починили метод `click`. А как насчет конструктора?
 
