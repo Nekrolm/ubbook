@@ -97,6 +97,26 @@ auto parent_widget = std::make_unqiue<Widget>(read_config());
 ```
 
 
+
+Нужно еще отметить, что продление жизни работает только при инициализации объектов аллоцированных на стеке. Если же вы создаете объект на куче/в собственном буфере с помощью `operator new`
+```C++
+// https://godbolt.org/z/7Y5brzGKv
+struct S {
+    const std::string& s;
+};
+
+int main() {
+    auto bad = new S {  "hellooooooooooooooooooooooo0000000" };
+    return  bad->s.length();
+}
+```
+То успешно получите висячую ссылку. GCC 14 молчит. Clang 19 выдает предупреждение
+```
+<source>:10:25: warning: temporary bound to reference member of allocated object will be destroyed at the end of the full-expression [-Wdangling-field]
+   10 |     auto bad = new S {  "hellooooooooooooooooooooooo0000000" };
+```
+
+
 ## Значения по умолчанию для ссылочных полей
 
 Закончить, пожалуй, нужно еще одним недоразуменинем с ссылочными полями. Им же можно задать значения по умолчанию...
