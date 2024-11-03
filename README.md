@@ -114,6 +114,7 @@
    6. [condition_variable](concurrency/condition_variable.md)
    7. [Гонки за vptr](concurrency/vptr.md)
    8. [std::async](concurrency/std_async.md)
+   9. [Файловая система](concurrency/filesystem.md)
 
 
 ---
