@@ -105,6 +105,7 @@
    1. [Невалидные указатели](pointer_provenance/invalid_pointer.md)
    2. [Placement `operator new[]`](pointer_provenance/array_placement_new.md)
    3. [Невыровненные ссылки](pointer_provenance/misaligned_reference.md)
+   4. [strict aliasing](pointer_provenance/strict_aliasing.md)
 9. Асинхронность и параллелизм
    1. [Race condition](concurrency/race_condition.md)
    2. [shared_ptr](concurrency/shared_ptr.md)
