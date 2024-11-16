@@ -22,7 +22,7 @@ v.erase(
     std::remove_if(v.begin(), v.end(), [](int x){ return x % 2 != 0; }),
     v.end()
 );
-std::transform(v.begin(), v.end(), [](int x){return x * x;});
+std::transform(v.begin(), v.end(), v.begin(), [](int x){return x * x;});
 return v;
 ```
 
