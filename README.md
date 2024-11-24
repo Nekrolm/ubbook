@@ -101,6 +101,7 @@
    15. [Невиртуальные виртуальные функции](runtime/virtual_functions.md)
    16. [Variable length array](runtime/vla.md)
    17. [ODR violation и разделяемые библиотеки](runtime/dll_and_odr_violation.md)
+   18. [Владение и исключения](runtime/ownership_and_exceptions.md)
 8. Происхождение указателей
    1. [Невалидные указатели](pointer_provenance/invalid_pointer.md)
    2. [Placement `operator new[]`](pointer_provenance/array_placement_new.md)
