@@ -1,6 +1,6 @@
 # C++ programmer's guide to undefined behavior
 
-The book (started just a series of blogposts) is originaly written in Russian language and this repository currenlty doesn't have full and organized translation for English
+The book (started just as a series of blogposts) is originaly written in Russian language, and this repository currenlty doesn't have full and organized translation for English
 
 In cooperation with [PVS-studio](https://pvs-studio.com/), I'm working on extended English version. It's available as a series of 11 posts in PVS-studio blog
 
