@@ -14,7 +14,7 @@ In cooperation with [PVS-studio](https://pvs-studio.com/), I'm working on extend
 - [Part 7](https://pvs-studio.com/en/blog/posts/cpp/1174/)
 - [Part 8](https://pvs-studio.com/en/blog/posts/cpp/1178/)
 - [Part 9](https://pvs-studio.com/en/blog/posts/cpp/1182/)
-- Part 10 -- comming soon
+- [Part 10](https://pvs-studio.com/en/blog/posts/cpp/1193/)
 - Part 11 -- comming soon
 
 -------

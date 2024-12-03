@@ -85,6 +85,7 @@
    12. [std::ranges::transform | filter](standard_lib/transform_filter_ranges.md)
    13. [vector::reserve и vector::resize](standard_lib/vector_resize_reserve.md)
    14. [std::function](standard_lib/std_function_const.md)
+   15. [std::forward](standard_lib/forward.md)
 7. Исполнение программы
    1.  [Бесконечные циклы](runtime/endless_loop.md)
    2.  [Рекурсия](runtime/recursion.md)
