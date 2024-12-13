@@ -33,14 +33,14 @@
 # Содержание
 0. [Что такое UB и как оно проявляется](what_is_ub.md)
 1. [Как искать UB?](how_to_find_ub.md)
-2. [Сужающие преобразования](numeric/narrowing.md)
-3. Целые и вещественные числа
-   1. [Переполнение знаковых целых чисел](numeric/overflow.md)
-   2. [Числа с плавающей точкой](numeric/floats.md)
-   3. [Integer promotion](numeric/integer_promotion.md)
-   4. [char и знаковое расширение](numeric/char_sign_extension.md)
-   5. [Унарный минус для беззнаковых чисел](numeric/unsigned_unary_minus.md)
-4. Нарушения lifetime объектов
+2. Целые и вещественные числа
+   1. [Сужающие преобразования](numeric/narrowing.md)
+   2. [Переполнение знаковых целых чисел](numeric/overflow.md)
+   3. [Числа с плавающей точкой](numeric/floats.md)
+   4. [Integer promotion](numeric/integer_promotion.md)
+   5. [char и знаковое расширение](numeric/char_sign_extension.md)
+   6. [Унарный минус для беззнаковых чисел](numeric/unsigned_unary_minus.md)
+3. Нарушения lifetime объектов
    1. [Висячие ссылки — общие случаи](lifetime/use_after_free_in_general.md)
    2. [Автовывод типов и висячие ссылки](lifetime/decltype_auto_and_explicit_types.md)
    3. [std::string_view](lifetime/string_view.md)
@@ -56,7 +56,7 @@
    13. [C++20 direct initialization и ссылочные поля](lifetime/direct_initialization_references.md)
    14. [Тернарный оператор](lifetime/ternary_operator.md)
    15. [Корутины и время жизнь](lifetime/coroutines_and_lifetimes.md)
-5. (Не)работающий синтаксис
+4. (Не)работающий синтаксис
    1. [Most Vexing Parse](syntax/most_vexing_parse.md)
    2. [Const](syntax/const_launder.md)
    3. [std::move](syntax/move.md)
@@ -71,7 +71,7 @@
    12. [Атрибут [[assume]]](syntax/assume.md)
    13. [Конструкторы по умолчанию и = default](syntax/default_default_constructor.md)
    14. [implicit bool](syntax/implicit_bool.md)
-6. Стандартная библиотека
+5. Стандартная библиотека
    1. [NULL-терминированные строки](standard_lib/null_terminated_string.md)
    2. [Конструирование std::shared_ptr](standard_lib/shared_ptr_constructor.md)
    3. [shared_from_this](standard_lib/shared_from_this.md)
@@ -87,7 +87,7 @@
    13. [vector::reserve и vector::resize](standard_lib/vector_resize_reserve.md)
    14. [std::function](standard_lib/std_function_const.md)
    15. [std::forward](standard_lib/forward.md)
-7. Исполнение программы
+6. Исполнение программы
    1.  [Бесконечные циклы](runtime/endless_loop.md)
    2.  [Рекурсия](runtime/recursion.md)
    3.  [Ложный noexcept](runtime/noexcept.md)
@@ -106,12 +106,12 @@
    16. [Variable length array](runtime/vla.md)
    17. [ODR violation и разделяемые библиотеки](runtime/dll_and_odr_violation.md)
    18. [Владение и исключения](runtime/ownership_and_exceptions.md)
-8. Происхождение указателей
+7. Происхождение указателей
    1. [Невалидные указатели](pointer_provenance/invalid_pointer.md)
    2. [Placement `operator new[]`](pointer_provenance/array_placement_new.md)
    3. [Невыровненные ссылки](pointer_provenance/misaligned_reference.md)
    4. [strict aliasing](pointer_provenance/strict_aliasing.md)
-9. Асинхронность и параллелизм
+8. Асинхронность и параллелизм
    1. [Race condition](concurrency/race_condition.md)
    2. [shared_ptr](concurrency/shared_ptr.md)
    3. [thread::join](concurrency/jthread.md)
