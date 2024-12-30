@@ -15,7 +15,7 @@ Stack overflow не совсем неопределенное поведение
 ```C++
 struct Node {
     int value = 0;
-    std::vector<Node> childrens;
+    std::vector<Node> children;
 };
 ```
 
