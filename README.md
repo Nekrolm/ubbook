@@ -77,7 +77,7 @@
    3. [shared_from_this](standard_lib/shared_from_this.md)
    4. [потоки ввода/вывода](standard_lib/iostreams.md)
    5. [std::aligned_storage](standard_lib/aligned_storage.md)
-   6. [функции стандарной библиотеки как параметры](standard_lib/function_pass_and_address_restriction.md)
+   6. [функции стандартной библиотеки как параметры](standard_lib/function_pass_and_address_restriction.md)
    7. [std::ranges::views](standard_lib/ranges_views_lazy.md)
    8. [`operator[] ` ассоциативных контейнеров](standard_lib/map_subscript.md)
    9. [std::enable_if/std::void_t](standard_lib/enable_if_void_t.md)
