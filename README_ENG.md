@@ -2,7 +2,7 @@
 
 The book (started just as a series of blogposts) is originaly written in Russian language, and this repository currenlty doesn't have full and organized translation for English
 
-In cooperation with [PVS-studio](https://pvs-studio.com/), I'm working on extended English version. It's available as a series of 11 posts in PVS-studio blog
+In cooperation with [PVS-studio](https://pvs-studio.com/), I'm working on extended English version. It's available as a series of 11(12) posts in PVS-studio blog
 
 
 - [Part 1](https://pvs-studio.com/en/blog/posts/cpp/1129/)
@@ -15,7 +15,8 @@ In cooperation with [PVS-studio](https://pvs-studio.com/), I'm working on extend
 - [Part 8](https://pvs-studio.com/en/blog/posts/cpp/1178/)
 - [Part 9](https://pvs-studio.com/en/blog/posts/cpp/1182/)
 - [Part 10](https://pvs-studio.com/en/blog/posts/cpp/1193/)
-- Part 11 -- comming soon
+- [Part 11](https://pvs-studio.com/en/blog/posts/cpp/1199/)
+- [Part 12](https://pvs-studio.com/en/blog/posts/cpp/1211/)
 
 -------
 
