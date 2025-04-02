@@ -242,7 +242,89 @@ constexpr decltype(auto) operator*() const  noexcept(noexcept(invoke(*parent_->f
 
 ### Что делать
 
-Если вы очень любите стандартный библиотеку, то постарайтесь никогда не использовать `views::transfrom` в цепочках перед `filter`, `take_while`, `drop_while` и другими нетривиальными комбинаторами, которым нужен доступ к элементу. 
+Если вы очень любите стандартный библиотеку, то постарайтесь никогда не использовать `views::transfrom` в цепочках перед `filter`, `take_while`, `drop_while` и другими нетривиальными комбинаторами, которым нужен **временный** доступ к элементу. 
+
+#### `views::join` и `std::optional`
+
+В мире функциональных языков программирования, для цепочки `transform | filter` часто можно найти отдельную функцию / метод, которая объединяет оба действия тем или иным способом. 
+
+Например, в у итераторов Rust есть метод `filter_map`, принимающий функцию с сигнатурой `T -> Option<U>`. Если фунция вернет `None` — элемент пропускается.
+
+Другой пример — JavaScript. У массивов есть метод `flatMap`, которым, например, можно отобразить каждый ненужный элемент в пустой массив, а нужный — в массив из одного элемента. И тем самым отфильтровать.
+
+``` JavaScript
+const arr1 = [1, 2, 1, 2, 3];
+const result = arr1.flatMap((num) => (num === 2 ? [] : [num]));
+console.log(result); // Array [1, 1, 3]
+```
+
+`flatMap` — довольно общая операция, трансформирующая каждый элемент последовательности в какую-то новую последовательность и объединяющая их в одну  "плоскую" последовательность.
+
+В стандартной библиотеке С++ непосредственно одного комбинатора `flatMap` (тут бы он неверняка назывался `flat_transform`) нету. Но того же эффекта можно достичь с помощью цепочки `transform | join`. Остенется лишь найти подходящий контейнер для представления последовательности из одного либо нуля элементов.
+
+И такой контейнер есть — `std::optional`. В C++26 ему добавили методы `.begin()` и `.end()`. Этот диапазон состоит либо из одного элемента, если `optional` содержит объект, или из нуля, если не содержит. И его можно использовать для фильтрации элементов!
+
+```cpp
+using Response = std::string;
+using Request = int;
+
+auto execute_request(Request r) -> std::expected<Response, Error> {
+    std::print("Executing request {}\n", r);
+    if (r % 2 == 0) {
+        return std::format("{}", r);
+    } else {
+        return std::unexpected(r);
+    }
+}
+
+int main()
+{
+    namespace views = std::ranges::views;
+    constexpr auto successfull = [](auto&& response) -> std::optional<Response> {    
+        if (response.has_value()) {
+            return std::move(response).value();
+        } else {
+            return std::nullopt;
+        }
+    };
+    std::vector<Request> requests = {1, 2, 3, 4, 5, 6};
+    for(auto resp : requests | views::transform(execute_request) 
+                             | views::transform(successfull)
+                             | views::join) {
+        std::print("got result: {}\n", resp);
+    }
+}
+```
+
+Результат окажется ровно такой, какой ожидается, без лишних вызовов:
+```
+Executing request 1
+Executing request 2
+got result: 2
+Executing request 3
+Executing request 4
+got result: 4
+Executing request 5
+Executing request 6
+got result: 6
+```
+
+На момент написания этого раздела (02.04.25) ни в одной реализации стандартной библиотеки это всё ещё не завезли, но можно использовать [Beman.Optional](https://github.com/bemanproject/optional) (ко всему прочему он ещё и поддерживает ссылки!)
+
+Хотя цепочка `transform(successfull) | join` намного хуже выражает намерение чем `filter(successfull)`. Но у нее существенное преимущество, если обратить внимание на тело цикла:
+
+```C++
+    for(auto resp : requests | views::transform(execute_request) 
+                             | views::transform(successfull)
+                             | views::join) {
+        // resp -- это Response. Не optional и не expected
+        // Это финальный, точно успешный Response. И мы знаем
+        // об этом теперь статически, на уровне системы типов
+        std::print("got result: {}\n", resp);
+    }
+```
+
+#### Кэширование
 
 Если вы используете `range-v3` от Эрика Ниблера, как совместимое со стандартной библиотекой решение, используйте `ranges::views::cache1` в конце цепочек `transform`, чтоб не выполнять их повторно.
 
@@ -262,7 +344,7 @@ auto with_cache = v
 for(auto _ : with_cache);
 ```
 
-В самой стандартной библиотеке подобный кэширующий [std::views::cache_last](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p3138r0.html) может появиться в C++26 или позже.
+В самой стандартной библиотеке подобный кэширующий [std::views::cache_last](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p3138r0.html) появится в C++26
 
 Учитывайте, что в таком случае весь perfect forwarding заканчивается. В версии Эрика Ниблера возвращается rvalue ссылка, в предложенной std:: версии возвращается lvalue ссылка — может потребоваться дополнительное явное перемещение, если нужно избежать копирований.
 
