@@ -242,7 +242,54 @@ constexpr decltype(auto) operator*() const  noexcept(noexcept(invoke(*parent_->f
 
 ### Что делать
 
-Если вы очень любите стандартный библиотеку, то постарайтесь никогда не использовать `views::transfrom` в цепочках перед `filter`, `take_while`, `drop_while` и другими нетривиальными комбинаторами, которым нужен доступ к элементу. 
+#### `std::optional::join`
+
+Начиная с C++26 в `std::optional` добавляются методы `.begin()` и `.end()`. Этот диапазон состоит либо из одного элемента, если `optional` содержит объект, или из нуля, если не содержит.
+Чуть ли не единственное применение этой диковинной техники это использование таких `optional`'ов вместе с `std::views::join`:
+```cpp
+using Response = std::string;
+using Request = int;
+
+auto execute_request(Request r) -> std::optional<Response>
+{
+    std::print("Executing request {}\n", r);
+    if(r % 2 == 0) {
+        return std::format("{}", r);
+    } else {
+        return std::nullopt;
+    }
+}
+
+int main()
+{
+    namespace views = std::ranges::views;
+    std::vector<Request> requests = {1, 2, 3, 4, 5, 6};
+    for(auto resp : requests | views::transform(execute_request) | views::join) {
+        std::print("got result: {}\n", resp);
+    }
+}
+```
+
+Выхлоп ровно такой, какой ожидается, без лишнего оверхеда:
+```
+Executing request 1
+Executing request 2
+got result: 2
+Executing request 3
+Executing request 4
+got result: 4
+Executing request 5
+Executing request 6
+got result: 6
+```
+
+Минусы:
+* На момент написания этого раздела (02.04.25) ни в одной реализации стандартной библиотеки это всё ещё не завезли, но можно использовать [Beman.Optional](https://github.com/bemanproject/optional) (ко всему прочему он ещё и поддерживает ссылки!)
+* У итераторов больше не будет метода `.base()`, поэтому получить оригинальный итератор больше не выйдет
+* В `std::expected` такого не завезли, поэтому придётся потанцевать с трансформацией одного в другое
+* Может нарушаться SRP. У `transform(square) | filter(is_even)` очевидно более продуманная и изящная композиция, нежели чем у `transform(square_only_for_even_numbers) | join`
+
+#### Кэши
 
 Если вы используете `range-v3` от Эрика Ниблера, как совместимое со стандартной библиотекой решение, используйте `ranges::views::cache1` в конце цепочек `transform`, чтоб не выполнять их повторно.
 
