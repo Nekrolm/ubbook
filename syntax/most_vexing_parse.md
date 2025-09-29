@@ -10,8 +10,8 @@ template <class T>
 struct STagged {};
 
 
-using S1 = STagged<struct Tag1>; // преобъявление струкруты Tag1
-using S2 = STagged<struct Tag2*>; // преобъявление струкруты Tag2
+using S1 = STagged<struct Tag1>; // предобъявление струкруты Tag1
+using S2 = STagged<struct Tag2*>; // предобъявление струкруты Tag2
 
 void fun(struct Tag3*); // предобъявление структуры Tag3
 
@@ -93,7 +93,7 @@ int main() {
 }
 ```
 
-Clang способен предепреждать о подобном.
+Clang способен предупреждать о подобном.
 
 С++11 и новее предлагают *universal initialization* (через `{}`), которая не совсем *universal* и имеет свои проблемы.
 C++20 предлагает еще одну *universal* инициализацию, но уже снова через `()`...

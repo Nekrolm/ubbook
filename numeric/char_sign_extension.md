@@ -19,7 +19,7 @@ struct CharTable {
 };
 ```
 
-Все ли впорядке с этим безобидным методом `is_whitespace`? Ну кроме того, что `char` в C/C++ обычно восьмибитный, а в unicode [есть](https://jkorpela.fi/chars/spaces.html) пробельные символы, кодируемые 16 битами.
+Все ли в порядке с этим безобидным методом `is_whitespace`? Ну кроме того, что `char` в C/C++ обычно восьмибитный, а в unicode [есть](https://jkorpela.fi/chars/spaces.html) пробельные символы, кодируемые 16 битами.
 
 
 Давайте [потестируем](https://godbolt.org/z/75rTW1nMG)
