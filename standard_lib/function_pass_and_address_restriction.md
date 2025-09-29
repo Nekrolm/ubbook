@@ -129,14 +129,14 @@ auto f = [](float a) -> float {
 
 int main() {
     return integrate((float(*)(float))(f));
-    // комилируется и работает
+    // компилируется и работает
 }
 
 // -----------------------------
 
 // https://godbolt.org/z/fqzdse1Ya
 
-// ниблоиды в std чаще определяются так, а не с помощью лямбл
+// ниблоиды в std чаще определяются так, а не с помощью лямбд
 struct {
     static float operator()(float x) {
         return x;
@@ -210,7 +210,7 @@ float integrate<float (*)(float)>(float (*)(float)):
         pxor    xmm0, xmm0
         cvtsi2ss        xmm0, ebx
         add     ebx, 1
-        call    rbp  // ! нет информации о функии -- вызов по указателю
+        call    rbp  // ! нет информации о функции -- вызов по указателю
         addss   xmm0, DWORD PTR [rsp+12]
         movss   DWORD PTR [rsp+12], xmm0
         cmp     ebx, 26

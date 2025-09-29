@@ -217,7 +217,7 @@ int main() {
     m.set("Metric", val, std::move(comm)); // компилируется, как и хотели
     m.set("MName", val, std::string_view("comment")); // не компилируется, хорошо
     auto gen_comment = []()->std::string { return "comment"; };
-    m.set("MName", val, gen_comment()); //  рабоатет отлично
+    m.set("MName", val, gen_comment()); //  работает отлично
 }
 // https://godbolt.org/z/zjWGWY4xh
 ```
