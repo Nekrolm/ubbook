@@ -92,7 +92,7 @@ struct Widget {
 // Эта строчка после вашей оптимизации продолжает молча компилироваться
 // но теперь влечет неопределенное поведение
 // пример: https://gcc.godbolt.org/z/q73erhYWs
-auto parent_widget = std::make_unqiue<Widget>(read_config()); 
+auto parent_widget = std::make_unique<Widget>(read_config());
 // И статические анализаторы пока молчат https://gcc.godbolt.org/z/aMsT3afxb
 ```
 
