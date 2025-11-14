@@ -108,7 +108,7 @@ int main() {
         std::cout << std::format("{} {} {}", auto(r.data), auto(r.status), auto(r.value)); 
         // В С++20 
         auto data = r.data; auto status = r.status; auto value = r.value;
-        std::cout << std::format("{} {} {}", data, status, r.value); 
+        std::cout << std::format("{} {} {}", data, status, value); 
         // Или совершенно уродливо и не устойчиво к изменениям в типах
         std::cout << std::format("{} {} {}", static_cast<int>(r.data), 
                                              static_cast<char>(r.status), 
